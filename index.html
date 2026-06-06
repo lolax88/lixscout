@@ -1,0 +1,2402 @@
+<!DOCTYPE html>
+<html lang="id" data-lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lixscout — Sewa Motor Bali Terpercaya</title>
+<meta name="description" content="Sewa motor Bali terpercaya. Jelajahi Bali dengan bebas. Honda Vario, NMAX, PCX, XMAX tersedia. Harga mulai Rp 75.000/hari.">
+<meta name="theme-color" content="#C1440E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+<style>
+/* ============================
+   RESET & BASE
+   ============================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Balinese Palette */
+  --terracotta: #C1440E;
+  --terracotta-dark: #9A3610;
+  --gold: #D4A017;
+  --gold-light: #E8C547;
+  --green: #4A7C59;
+  --green-dark: #3A6247;
+  --linen: #F5EFE6;
+  --linen-warm: #EDE4D5;
+  --ink: #1C1917;
+  --ink-light: #44403C;
+  --stone: #78716C;
+  --poleng-dark: #2C2520;
+  --poleng-light: #E8DDD0;
+
+  /* Type Scale — Modular (golden ratio-ish) */
+  --text-xs: clamp(0.694rem, 0.66rem + 0.17vw, 0.8rem);
+  --text-sm: clamp(0.833rem, 0.78rem + 0.27vw, 1rem);
+  --text-base: clamp(1rem, 0.93rem + 0.37vw, 1.125rem);
+  --text-lg: clamp(1.15rem, 1.05rem + 0.5vw, 1.35rem);
+  --text-xl: clamp(1.35rem, 1.2rem + 0.75vw, 1.7rem);
+  --text-2xl: clamp(1.6rem, 1.35rem + 1.25vw, 2.2rem);
+  --text-3xl: clamp(2rem, 1.6rem + 2vw, 3rem);
+  --text-4xl: clamp(2.4rem, 1.8rem + 3vw, 4.2rem);
+  --text-hero: clamp(2.8rem, 2rem + 4vw, 5.5rem);
+
+  /* Spacing — Golden Ratio */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.875rem;
+  --sp-4: 1.375rem;
+  --sp-5: 2.25rem;
+  --sp-6: 3.625rem;
+  --sp-7: 5.875rem;
+  --sp-8: 9.5rem;
+
+  /* Fonts */
+  --font-display: 'Cinzel', serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(28,25,23,0.06);
+  --shadow-md: 0 4px 16px rgba(28,25,23,0.08);
+  --shadow-lg: 0 12px 48px rgba(28,25,23,0.12);
+  --shadow-gold: 0 4px 24px rgba(212,160,23,0.15);
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--linen);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ============================
+   LOTUS LOADER
+   ============================ */
+.loader-overlay {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--linen);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+.loader-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.lotus-loader { width: 80px; height: 80px; position: relative; }
+.lotus-loader .petal {
+  position: absolute; left: 50%; bottom: 40%;
+  width: 12px; height: 32px;
+  background: var(--terracotta);
+  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
+  transform-origin: bottom center;
+  opacity: 0;
+}
+.lotus-loader .petal:nth-child(1) { transform: translateX(-50%) rotate(-60deg); animation: lotusBloom 1.8s ease-out 0s forwards; }
+.lotus-loader .petal:nth-child(2) { transform: translateX(-50%) rotate(-40deg); animation: lotusBloom 1.8s ease-out 0.1s forwards; }
+.lotus-loader .petal:nth-child(3) { transform: translateX(-50%) rotate(-20deg); animation: lotusBloom 1.8s ease-out 0.2s forwards; }
+.lotus-loader .petal:nth-child(4) { transform: translateX(-50%) rotate(0deg); animation: lotusBloom 1.8s ease-out 0.3s forwards; }
+.lotus-loader .petal:nth-child(5) { transform: translateX(-50%) rotate(20deg); animation: lotusBloom 1.8s ease-out 0.4s forwards; }
+.lotus-loader .petal:nth-child(6) { transform: translateX(-50%) rotate(40deg); animation: lotusBloom 1.8s ease-out 0.5s forwards; }
+.lotus-loader .petal:nth-child(7) { transform: translateX(-50%) rotate(60deg); animation: lotusBloom 1.8s ease-out 0.6s forwards; }
+
+@keyframes lotusBloom {
+  0% { opacity: 0; transform: translateX(-50%) rotate(var(--rot, 0deg)) scale(0.3); height: 8px; }
+  60% { opacity: 1; height: 32px; }
+  100% { opacity: 1; transform: translateX(-50%) rotate(var(--rot, 0deg)) scale(1); height: 28px; }
+}
+
+.lotus-loader .petal:nth-child(1) { --rot: -60deg; background: var(--terracotta); }
+.lotus-loader .petal:nth-child(2) { --rot: -40deg; background: #D05A22; }
+.lotus-loader .petal:nth-child(3) { --rot: -20deg; background: var(--gold); }
+.lotus-loader .petal:nth-child(4) { --rot: 0deg; background: var(--gold-light); }
+.lotus-loader .petal:nth-child(5) { --rot: 20deg; background: var(--gold); }
+.lotus-loader .petal:nth-child(6) { --rot: 40deg; background: #D05A22; }
+.lotus-loader .petal:nth-child(7) { --rot: 60deg; background: var(--terracotta); }
+
+/* ============================
+   POLENG DIVIDER
+   ============================ */
+.poleng-divider {
+  width: 100%; height: 18px;
+  background-image:
+    repeating-linear-gradient(90deg, var(--poleng-dark) 0, var(--poleng-dark) 18px, var(--poleng-light) 18px, var(--poleng-light) 36px);
+  opacity: 0.35;
+}
+.poleng-divider.thin { height: 10px; }
+
+/* ============================
+   PATRA BORDER SVG PATTERN
+   ============================ */
+.patra-border-top,
+.patra-border-bottom {
+  width: 100%; height: 24px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 24'%3E%3Cpath d='M0 12 Q15 0 30 12 Q45 24 60 12 Q75 0 90 12 Q105 24 120 12' fill='none' stroke='%23D4A017' stroke-width='1.5' opacity='0.4'/%3E%3Ccircle cx='15' cy='6' r='2' fill='%23D4A017' opacity='0.3'/%3E%3Ccircle cx='45' cy='18' r='2' fill='%23D4A017' opacity='0.3'/%3E%3Ccircle cx='75' cy='6' r='2' fill='%23D4A017' opacity='0.3'/%3E%3Ccircle cx='105' cy='18' r='2' fill='%23D4A017' opacity='0.3'/%3E%3C/svg%3E") repeat-x center;
+}
+
+/* ============================
+   NAVIGATION
+   ============================ */
+.navbar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: var(--sp-3) var(--sp-5);
+  display: flex; align-items: center; justify-content: space-between;
+  transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.3s ease;
+}
+.navbar.scrolled {
+  background: rgba(245,239,230,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: var(--shadow-md);
+  padding: var(--sp-2) var(--sp-5);
+}
+
+.nav-brand {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--linen);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  display: flex; align-items: center; gap: 0.5rem;
+  transition: color 0.3s ease;
+}
+.nav-brand svg { width: 28px; height: 28px; }
+.navbar.scrolled .nav-brand { color: var(--ink); }
+.navbar.scrolled .nav-brand svg path { fill: var(--terracotta); }
+
+.nav-links {
+  display: flex; align-items: center; gap: var(--sp-4);
+  list-style: none;
+}
+.nav-links a {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: rgba(245,239,230,0.85);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+  position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px; background: var(--gold);
+  transition: width 0.3s var(--ease-out);
+}
+.nav-links a:hover::after { width: 100%; }
+.nav-links a:hover { color: var(--linen); }
+.navbar.scrolled .nav-links a { color: var(--ink-light); }
+.navbar.scrolled .nav-links a:hover { color: var(--terracotta); }
+
+.lang-toggle {
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--linen);
+  padding: 0.3rem 0.65rem;
+  border-radius: 0.35rem;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.05em;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+}
+.navbar.scrolled .lang-toggle {
+  background: var(--linen-warm);
+  border-color: var(--stone);
+  color: var(--ink);
+}
+.lang-toggle:hover { background: rgba(255,255,255,0.25); }
+.navbar.scrolled .lang-toggle:hover { background: var(--gold); color: white; }
+
+.mobile-menu-btn {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  width: 28px; height: 20px; position: relative;
+  min-width: 44px; min-height: 44px;
+  display: flex; align-items: center; justify-content: center;
+}
+.mobile-menu-btn span {
+  display: block; width: 100%; height: 2px;
+  background: var(--linen);
+  position: absolute; left: 0;
+  transition: all 0.3s ease;
+}
+.navbar.scrolled .mobile-menu-btn span { background: var(--ink); }
+.mobile-menu-btn span:nth-child(1) { top: 0; }
+.mobile-menu-btn span:nth-child(2) { top: 9px; }
+.mobile-menu-btn span:nth-child(3) { top: 18px; }
+.mobile-menu-btn.active span:nth-child(1) { top: 9px; transform: rotate(45deg); }
+.mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+.mobile-menu-btn.active span:nth-child(3) { top: 9px; transform: rotate(-45deg); }
+
+/* ============================
+   HERO
+   ============================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  background: var(--ink);
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    linear-gradient(135deg, rgba(28,25,23,0.7) 0%, rgba(193,68,14,0.3) 50%, rgba(28,25,23,0.8) 100%),
+    url('img/hero-bg.jpg') center/cover no-repeat;
+}
+.hero-bg::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0; height: 40%;
+  background: linear-gradient(to top, rgba(28,25,23,0.6), transparent);
+}
+
+.hero-content {
+  position: relative; z-index: 2;
+  text-align: center;
+  padding: var(--sp-7) var(--sp-5);
+  max-width: 900px;
+}
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(212,160,23,0.2);
+  border: 1px solid rgba(212,160,23,0.4);
+  padding: 0.4rem 1.2rem;
+  border-radius: 2rem;
+  font-size: var(--text-xs);
+  color: var(--gold-light);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: var(--sp-4);
+  animation: fadeUp 0.8s var(--ease-out) 0.5s backwards;
+}
+.hero-badge::before { content: '✦'; }
+
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 700;
+  color: var(--linen);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: var(--sp-4);
+  animation: fadeUp 0.8s var(--ease-out) 0.7s backwards;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--gold-light);
+  position: relative;
+}
+.hero h1 em::after {
+  content: '';
+  position: absolute; bottom: 0.05em; left: -2%; right: -2%;
+  height: 3px;
+  background: var(--gold);
+  opacity: 0.6;
+}
+
+.hero-sub {
+  font-size: var(--text-lg);
+  color: rgba(245,239,230,0.8);
+  max-width: 600px;
+  margin: 0 auto var(--sp-5);
+  line-height: 1.6;
+  animation: fadeUp 0.8s var(--ease-out) 0.9s backwards;
+}
+
+.hero-ctas {
+  display: flex; gap: var(--sp-3);
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: fadeUp 0.8s var(--ease-out) 1.1s backwards;
+}
+
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  border-radius: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--text-sm);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: all 0.25s var(--ease-spring);
+  border: none; cursor: pointer;
+  position: relative; overflow: hidden;
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--terracotta);
+  color: var(--linen);
+  box-shadow: 0 4px 20px rgba(193,68,14,0.3);
+}
+.btn-primary:hover {
+  background: var(--terracotta-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(193,68,14,0.4);
+  color: white;
+}
+
+.btn-gold {
+  background: var(--gold);
+  color: var(--ink);
+  box-shadow: var(--shadow-gold);
+}
+.btn-gold:hover {
+  background: var(--gold-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(212,160,23,0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--linen);
+  border: 2px solid rgba(245,239,230,0.4);
+}
+.btn-outline:hover {
+  background: rgba(245,239,230,0.1);
+  border-color: var(--gold);
+  color: var(--gold-light);
+}
+
+/* Candi Bentar icon */
+.candi-icon { display: inline-block; }
+.candi-icon svg { width: 18px; height: 18px; vertical-align: middle; }
+
+.hero-stats {
+  display: flex; gap: var(--sp-6);
+  justify-content: center;
+  margin-top: var(--sp-6);
+  animation: fadeUp 0.8s var(--ease-out) 1.3s backwards;
+}
+.hero-stat {
+  text-align: center;
+}
+.hero-stat-num {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--gold-light);
+}
+.hero-stat-label {
+  font-size: var(--text-xs);
+  color: rgba(245,239,230,0.6);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-top: 0.2rem;
+}
+
+.scroll-hint {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  color: rgba(245,239,230,0.4);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  animation: float 2.5s ease-in-out infinite;
+}
+.scroll-hint .mouse {
+  width: 22px; height: 34px;
+  border: 2px solid rgba(245,239,230,0.3);
+  border-radius: 11px;
+  position: relative;
+}
+.scroll-hint .mouse::after {
+  content: '';
+  position: absolute; top: 6px; left: 50%;
+  transform: translateX(-50%);
+  width: 3px; height: 8px;
+  background: var(--gold);
+  border-radius: 2px;
+  animation: scrollDot 1.8s ease-in-out infinite;
+}
+
+@keyframes scrollDot {
+  0%, 100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  50% { opacity: 0.3; transform: translateX(-50%) translateY(10px); }
+}
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-8px); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ============================
+   SECTION COMMON
+   ============================ */
+.section {
+  padding: clamp(4rem, 8vw, 8rem) var(--sp-5);
+  position: relative;
+}
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto var(--sp-6);
+}
+.section-label {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--terracotta);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: var(--sp-2);
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  margin-bottom: var(--sp-3);
+}
+.section-desc {
+  font-size: var(--text-base);
+  color: var(--stone);
+  line-height: 1.7;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--sp-4);
+}
+
+/* ============================
+   AVAILABILITY CHECKER
+   ============================ */
+.checker-wrap {
+  background: var(--linen);
+  padding: 0 var(--sp-5);
+  position: relative;
+  z-index: 3;
+  margin-top: -3rem;
+}
+.checker {
+  max-width: 1000px;
+  margin: 0 auto;
+  background: white;
+  border-radius: 1rem;
+  padding: var(--sp-5);
+  box-shadow: var(--shadow-lg);
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr auto;
+  gap: var(--sp-3);
+  align-items: end;
+  border: 1px solid rgba(212,160,23,0.15);
+}
+.checker label {
+  display: block;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--stone);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.4rem;
+}
+.checker input, .checker select {
+  width: 100%;
+  padding: 0.7rem 0.9rem;
+  border: 1.5px solid var(--linen-warm);
+  border-radius: 0.5rem;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--ink);
+  background: var(--linen);
+  transition: border-color 0.2s ease;
+  appearance: auto;
+}
+.checker input:focus, .checker select:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(212,160,23,0.12);
+}
+.checker .btn { height: 44px; white-space: nowrap; }
+
+/* ============================
+   FLEET
+   ============================ */
+.fleet-bg { background: white; }
+
+.fleet-tabs {
+  display: flex; justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: var(--sp-5);
+  flex-wrap: wrap;
+}
+.fleet-tab {
+  padding: 0.5rem 1.3rem;
+  border-radius: 2rem;
+  border: 1.5px solid var(--linen-warm);
+  background: transparent;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--stone);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.fleet-tab:hover { border-color: var(--gold); color: var(--gold); }
+.fleet-tab.active {
+  background: var(--terracotta);
+  color: white;
+  border-color: var(--terracotta);
+}
+
+.fleet-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+  gap: var(--sp-4);
+}
+
+.bike-card {
+  background: var(--linen);
+  border: 1.5px solid rgba(212,160,23,0.2);
+  border-radius: 0.85rem;
+  overflow: hidden;
+  transition: all 0.3s var(--ease-out);
+  position: relative;
+}
+.bike-card::before {
+  content: '';
+  position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
+  border: 1px solid rgba(212,160,23,0.1);
+  border-radius: 0.6rem;
+  pointer-events: none;
+  transition: border-color 0.3s ease;
+}
+.bike-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--gold);
+}
+.bike-card:hover::before { border-color: rgba(212,160,23,0.25); }
+
+/* Patra corner ornament */
+.bike-card::after {
+  content: '';
+  position: absolute; top: 12px; right: 12px;
+  width: 24px; height: 24px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 Q18 8 12 12 Q6 8 12 2' fill='%23D4A017' opacity='0.3'/%3E%3Cpath d='M12 12 Q18 16 12 22 Q6 16 12 12' fill='%23D4A017' opacity='0.2'/%3E%3C/svg%3E") no-repeat center/contain;
+  z-index: 1;
+}
+
+.bike-img {
+  width: 100%; height: 190px;
+  background: var(--linen-warm);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.bike-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.bike-card:hover .bike-img img { transform: scale(1.05); }
+.bike-badge {
+  position: absolute; top: 12px; left: 12px;
+  background: var(--green);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: 0.25rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.bike-info {
+  padding: var(--sp-4);
+}
+.bike-name {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.bike-spec {
+  font-size: var(--text-sm);
+  color: var(--stone);
+  margin-bottom: var(--sp-3);
+  display: flex; gap: var(--sp-3); align-items: center;
+}
+.bike-spec span { display: flex; align-items: center; gap: 0.25rem; }
+
+.bike-price-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: var(--sp-3);
+  border-top: 1px solid var(--linen-warm);
+}
+.bike-price {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--terracotta);
+}
+.bike-price small {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: var(--stone);
+}
+
+.bike-book {
+  padding: 0.5rem 1.2rem;
+  border-radius: 0.4rem;
+  background: var(--gold);
+  color: var(--ink);
+  font-size: var(--text-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: var(--font-body);
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.bike-book:hover {
+  background: var(--terracotta);
+  color: white;
+  transform: scale(1.03);
+}
+
+/* ============================
+   WHY US
+   ============================ */
+.whyus-bg {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Crect width='60' height='60' fill='%23F5EFE6'/%3E%3Crect x='0' y='0' width='30' height='30' fill='%23EDE4D5' opacity='0.3'/%3E%3Crect x='30' y='30' width='30' height='30' fill='%23EDE4D5' opacity='0.3'/%3E%3C/svg%3E");
+}
+
+.whyus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--sp-5);
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.whyus-card {
+  text-align: center;
+  padding: var(--sp-5) var(--sp-4);
+}
+.whyus-icon {
+  width: 72px; height: 72px;
+  margin: 0 auto var(--sp-4);
+  background: var(--linen);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-sm);
+  border: 2px solid rgba(212,160,23,0.15);
+  transition: all 0.3s ease;
+}
+.whyus-card:hover .whyus-icon {
+  background: var(--gold);
+  border-color: var(--gold);
+  transform: scale(1.08);
+}
+.whyus-card:hover .whyus-icon svg { stroke: white; }
+
+.whyus-icon svg {
+  width: 32px; height: 32px;
+  stroke: var(--terracotta);
+  stroke-width: 1.5;
+  fill: none;
+  transition: stroke 0.3s ease;
+}
+.whyus-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: var(--sp-2);
+}
+.whyus-desc {
+  font-size: var(--text-sm);
+  color: var(--stone);
+  line-height: 1.65;
+}
+
+/* ============================
+   DESTINATIONS
+   ============================ */
+.dest-bg { background: var(--ink); overflow: hidden; }
+.dest-bg .section-label { color: var(--gold-light); }
+.dest-bg .section-title { color: var(--linen); }
+.dest-bg .section-desc { color: rgba(245,239,230,0.6); }
+
+.dest-scroll {
+  display: flex; gap: var(--sp-4);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: var(--sp-3);
+  scrollbar-width: none;
+}
+.dest-scroll::-webkit-scrollbar { display: none; }
+
+.dest-card {
+  flex: 0 0 280px;
+  scroll-snap-align: start;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.dest-card:hover { transform: scale(1.03); }
+.dest-card img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.dest-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(28,25,23,0.85) 0%, rgba(28,25,23,0.1) 50%, transparent 100%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: var(--sp-4);
+}
+.dest-name {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--linen);
+  margin-bottom: 0.25rem;
+}
+.dest-info {
+  font-size: var(--text-xs);
+  color: rgba(245,239,230,0.65);
+  display: flex; gap: var(--sp-3);
+}
+.dest-info span { display: flex; align-items: center; gap: 0.3rem; }
+
+/* ============================
+   HOW TO RENT
+   ============================ */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5);
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+}
+/* connecting line */
+.steps-grid::before {
+  content: '';
+  position: absolute;
+  top: 56px;
+  left: calc(16.67% + 20px);
+  right: calc(16.67% + 20px);
+  height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--terracotta), var(--green));
+  opacity: 0.3;
+}
+
+.step-card {
+  text-align: center;
+  position: relative;
+}
+.step-num {
+  width: 48px; height: 48px;
+  margin: 0 auto var(--sp-4);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: var(--text-lg);
+  position: relative;
+  z-index: 1;
+}
+.step-card:nth-child(1) .step-num { background: var(--terracotta); color: white; }
+.step-card:nth-child(2) .step-num { background: var(--gold); color: var(--ink); }
+.step-card:nth-child(3) .step-num { background: var(--green); color: white; }
+
+.step-icon {
+  width: 100px; height: 100px;
+  margin: 0 auto var(--sp-3);
+  background: var(--linen-warm);
+  border-radius: 1rem;
+  display: flex; align-items: center; justify-content: center;
+  border: 1.5px solid rgba(212,160,23,0.15);
+}
+.step-icon svg { width: 48px; height: 48px; }
+
+.step-title {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: var(--sp-2);
+}
+.step-desc {
+  font-size: var(--text-sm);
+  color: var(--stone);
+  line-height: 1.65;
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+/* ============================
+   TESTIMONIALS
+   ============================ */
+.testi-bg {
+  background: var(--terracotta);
+}
+
+.testi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--sp-4);
+}
+
+.testi-card {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 0.75rem;
+  padding: var(--sp-5);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+.testi-card:hover { transform: translateY(-3px); }
+
+/* Aksara Bali decorative watermark */
+.testi-card::before {
+  content: 'ᬳ';
+  position: absolute; top: -10px; right: 15px;
+  font-size: 120px;
+  color: rgba(255,255,255,0.04);
+  font-family: 'Noto Sans Balinese', serif;
+  pointer-events: none;
+  line-height: 1;
+}
+
+.testi-stars {
+  color: var(--gold-light);
+  font-size: var(--text-sm);
+  margin-bottom: var(--sp-3);
+  letter-spacing: 0.1em;
+}
+.testi-text {
+  font-size: var(--text-base);
+  color: var(--linen);
+  line-height: 1.7;
+  margin-bottom: var(--sp-4);
+  font-style: italic;
+}
+.testi-author {
+  display: flex; align-items: center; gap: var(--sp-3);
+}
+.testi-avatar {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: var(--text-sm);
+  color: var(--gold-light);
+  border: 2px solid rgba(212,160,23,0.3);
+}
+.testi-name {
+  font-weight: 600;
+  color: var(--linen);
+  font-size: var(--text-sm);
+}
+.testi-origin {
+  font-size: var(--text-xs);
+  color: rgba(245,239,230,0.5);
+}
+
+.testi-bg .section-label { color: var(--gold-light); }
+.testi-bg .section-title { color: var(--linen); }
+.testi-bg .section-desc { color: rgba(245,239,230,0.65); }
+
+/* ============================
+   FAQ
+   ============================ */
+.faq-list {
+  max-width: 740px;
+  margin: 0 auto;
+}
+.faq-item {
+  border-bottom: 1px solid var(--linen-warm);
+}
+.faq-q {
+  width: 100%; background: none; border: none;
+  padding: var(--sp-4) 0;
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--ink);
+  text-align: left;
+  transition: color 0.2s ease;
+  font-family: var(--font-body);
+}
+.faq-q:hover { color: var(--terracotta); }
+.faq-q .icon {
+  width: 24px; height: 24px; flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+.faq-item.open .faq-q .icon { transform: rotate(45deg); }
+
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s var(--ease-out), padding 0.3s ease;
+}
+.faq-item.open .faq-a { max-height: 300px; }
+.faq-a-inner {
+  padding-bottom: var(--sp-4);
+  font-size: var(--text-sm);
+  color: var(--stone);
+  line-height: 1.7;
+}
+
+/* ============================
+   CTA BANNER
+   ============================ */
+.cta-banner {
+  background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+  padding: var(--sp-6) var(--sp-5);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.cta-banner::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50 10 Q65 25 50 40 Q35 25 50 10' fill='%23ffffff' opacity='0.03'/%3E%3Cpath d='M50 60 Q65 75 50 90 Q35 75 50 60' fill='%23ffffff' opacity='0.03'/%3E%3C/svg%3E");
+  background-size: 80px 80px;
+}
+.cta-banner h2 {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--linen);
+  margin-bottom: var(--sp-3);
+  position: relative;
+}
+.cta-banner p {
+  color: rgba(245,239,230,0.75);
+  margin-bottom: var(--sp-4);
+  font-size: var(--text-base);
+  position: relative;
+}
+.cta-banner .btn { position: relative; }
+
+/* ============================
+   FOOTER
+   ============================ */
+.footer {
+  background: var(--poleng-dark);
+  color: rgba(245,239,230,0.6);
+  padding: var(--sp-7) var(--sp-5) var(--sp-5);
+  position: relative;
+}
+
+/* Pura skyline silhouette */
+.footer::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 60px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath d='M0 60 L60 35 L75 45 L90 20 L100 30 L105 10 L110 30 L120 20 L135 45 L150 35 L210 60 L280 40 L290 50 L300 30 L310 40 L315 15 L320 40 L330 30 L340 50 L350 40 L420 60 L500 38 L510 48 L520 28 L525 38 L528 8 L531 38 L536 28 L546 48 L556 38 L620 60 L700 42 L715 52 L725 32 L730 42 L733 18 L736 42 L741 32 L751 52 L766 42 L820 60 L880 36 L895 46 L905 26 L910 36 L913 6 L916 36 L921 26 L931 46 L946 36 L1000 60 L1060 40 L1075 50 L1085 30 L1090 40 L1093 12 L1096 40 L1101 30 L1111 50 L1126 40 L1180 60 L1240 44 L1255 54 L1265 34 L1270 44 L1273 20 L1276 44 L1281 34 L1291 54 L1306 44 L1360 60 L1440 60 Z' fill='%232C2520'/%3E%3C/svg%3E") repeat-x top center;
+  background-size: auto 60px;
+}
+
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: var(--sp-5);
+  padding-top: 4rem;
+}
+
+.footer-brand {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: 700;
+  color: var(--linen);
+  margin-bottom: var(--sp-3);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.footer-desc {
+  font-size: var(--text-sm);
+  line-height: 1.7;
+  margin-bottom: var(--sp-4);
+}
+
+.footer-social {
+  display: flex; gap: var(--sp-3);
+}
+.footer-social a {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s ease;
+}
+.footer-social a:hover { background: var(--gold); }
+.footer-social a svg { width: 18px; height: 18px; fill: rgba(245,239,230,0.7); }
+.footer-social a:hover svg { fill: var(--ink); }
+
+.footer h4 {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--linen);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: var(--sp-4);
+}
+.footer-links {
+  list-style: none;
+  display: flex; flex-direction: column; gap: var(--sp-2);
+}
+.footer-links a {
+  color: rgba(245,239,230,0.5);
+  text-decoration: none;
+  font-size: var(--text-sm);
+  transition: color 0.2s ease;
+}
+.footer-links a:hover { color: var(--gold-light); }
+
+.footer-contact p {
+  font-size: var(--text-sm);
+  margin-bottom: var(--sp-2);
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.footer-contact a { color: var(--gold-light); text-decoration: none; }
+.footer-contact a:hover { text-decoration: underline; }
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: var(--sp-5) auto 0;
+  padding-top: var(--sp-4);
+  border-top: 1px solid rgba(255,255,255,0.08);
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: var(--sp-3);
+  font-size: var(--text-xs);
+}
+
+/* ============================
+   WHATSAPP FLOATING
+   ============================ */
+.wa-float {
+  position: fixed;
+  bottom: 24px; right: 24px;
+  z-index: 90;
+  width: 56px; height: 56px;
+  border-radius: 50%;
+  background: #25D366;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+  cursor: pointer;
+  transition: all 0.3s var(--ease-spring);
+  text-decoration: none;
+  animation: waPulse 3s ease-in-out infinite;
+}
+.wa-float:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 28px rgba(37,211,102,0.5);
+}
+.wa-float svg { width: 28px; height: 28px; fill: white; }
+
+.wa-tooltip {
+  position: fixed;
+  bottom: 88px; right: 24px;
+  z-index: 89;
+  background: white;
+  color: var(--ink);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-md);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+.wa-tooltip.show { opacity: 1; transform: translateY(0); }
+.wa-tooltip::after {
+  content: '';
+  position: absolute; bottom: -6px; right: 20px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid white;
+}
+
+@keyframes waPulse {
+  0%, 100% { box-shadow: 0 4px 20px rgba(37,211,102,0.4); }
+  50% { box-shadow: 0 4px 20px rgba(37,211,102,0.4), 0 0 0 8px rgba(37,211,102,0.1); }
+}
+
+/* ============================
+   MOBILE NAV DRAWER
+   ============================ */
+.mobile-drawer {
+  display: none;
+  position: fixed; inset: 0; z-index: 99;
+  background: rgba(28,25,23,0.5);
+  backdrop-filter: blur(4px);
+  opacity: 0; visibility: hidden;
+  transition: all 0.3s ease;
+}
+.mobile-drawer.open { opacity: 1; visibility: visible; }
+
+.mobile-drawer-inner {
+  position: absolute; top: 0; right: 0;
+  width: 280px; height: 100%;
+  background: var(--linen);
+  padding: var(--sp-6) var(--sp-5);
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease-out);
+  overflow-y: auto;
+}
+.mobile-drawer.open .mobile-drawer-inner { transform: translateX(0); }
+
+.mobile-drawer-inner a {
+  display: block;
+  padding: var(--sp-3) 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--linen-warm);
+  transition: color 0.2s ease;
+}
+.mobile-drawer-inner a:hover { color: var(--terracotta); }
+
+.mobile-drawer-close {
+  position: absolute; top: var(--sp-4); right: var(--sp-4);
+  background: none; border: none;
+  font-size: 24px; color: var(--ink);
+  cursor: pointer;
+}
+
+/* ============================
+   MOBILE STICKY CTA BAR
+   ============================ */
+.mobile-cta-bar {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 88;
+  background: rgba(245,239,230,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  padding: 0.6rem 1rem;
+  padding-bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
+  box-shadow: 0 -2px 16px rgba(28,25,23,0.1);
+  display: none;
+  gap: 0.5rem;
+}
+.mobile-cta-bar .btn {
+  flex: 1;
+  text-align: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  padding: 0.6rem 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .mobile-cta-bar { display: flex; }
+  .wa-float { display: none; }
+  body { padding-bottom: 70px; }
+}
+
+/* ============================
+   SCROLL REVEAL
+   ============================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s var(--ease-out), transform 0.7s var(--ease-out);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+/* Safe area for notched phones */
+@supports (padding: env(safe-area-inset-bottom)) {
+  .wa-float { bottom: calc(24px + env(safe-area-inset-bottom)); }
+  .footer { padding-bottom: env(safe-area-inset-bottom); }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  .btn { min-height: 48px; padding: 0.75rem 1.5rem; }
+  .bike-book { min-height: 48px; padding: 0.6rem 1.4rem; }
+  .fleet-tab { min-height: 44px; padding: 0.5rem 1rem; }
+  .lang-toggle { min-height: 44px; padding: 0.4rem 0.8rem; }
+  .dest-card { flex: 0 0 260px; }
+  .nav-links a { padding: 0.5rem 0; }
+}
+
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .mobile-menu-btn { display: block; }
+  .mobile-drawer { display: block; }
+
+  .checker {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .hero-stats { gap: var(--sp-4); }
+  .footer-inner {
+    grid-template-columns: 1fr 1fr;
+  }
+  .steps-grid {
+    grid-template-columns: 1fr;
+    gap: var(--sp-4);
+  }
+  .steps-grid::before { display: none; }
+}
+
+@media (max-width: 600px) {
+  .checker {
+    grid-template-columns: 1fr;
+  }
+  .hero h1 { font-size: clamp(2rem, 1.5rem + 2.5vw, 3rem); }
+  .hero-stats { flex-direction: column; gap: var(--sp-3); }
+  .fleet-grid {
+    grid-template-columns: 1fr;
+  }
+  .testi-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+  .dest-card { flex: 0 0 240px; }
+}
+
+/* ============================
+   LANGUAGE TOGGLE VISIBILITY
+   ============================ */
+[data-lang="id"] .en { display: none; }
+[data-lang="en"] .id { display: none; }
+[data-lang="en"] .en { display: inline; }
+
+[data-lang="id"] .en-block { display: none; }
+[data-lang="en"] .id-block { display: none; }
+[data-lang="en"] .en-block { display: block; }
+
+[data-lang="id"] .en-flex { display: none; }
+[data-lang="en"] .id-flex { display: none; }
+[data-lang="en"] .en-flex { display: flex; }
+
+/* Frangipani accent */
+.frangipani {
+  position: absolute;
+  width: 40px; height: 40px;
+  opacity: 0.15;
+  pointer-events: none;
+}
+.frangipani svg { width: 100%; height: 100%; }
+
+/* ============================
+   EXTRAS BAR (from reference)
+   ============================ */
+.extras-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-4);
+  max-width: 900px;
+  margin: 0 auto;
+}
+.extra-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--text-sm);
+  color: var(--ink-light);
+  font-weight: 500;
+}
+.extra-item svg {
+  width: 20px; height: 20px;
+  stroke: var(--green);
+  fill: none;
+  stroke-width: 2;
+}
+
+/* Discount Banner */
+.discount-banner {
+  background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+  padding: var(--sp-4) var(--sp-5);
+  text-align: center;
+}
+.discount-banner h3 {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--ink);
+  margin-bottom: var(--sp-2);
+}
+.discount-banner p {
+  font-size: var(--text-sm);
+  color: rgba(28,25,23,0.7);
+  margin-bottom: var(--sp-3);
+}
+.discount-banner .btn-primary {
+  padding: 0.6rem 1.8rem;
+  font-size: var(--text-xs);
+}
+</style>
+
+<!-- Google Analytics 4 (GA4) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-80E4XXK5H"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-80E4XXK5H', { 'anonymize_ip': true });
+  gtag('config', 'G-80E4XXK5H', { 'send_page_view': true });
+</script>
+
+<!-- Meta Pixel (Facebook) -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '2148876072088030');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2148876072088030&ev=PageView&noscript=1"/></noscript>
+
+</head>
+<body>
+
+<!-- ======================== LOTUS LOADER ======================== -->
+<div class="loader-overlay" id="loader">
+  <div class="lotus-loader">
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
+    <div class="petal"></div>
+  </div>
+</div>
+
+<!-- ======================== NAVBAR ======================== -->
+<nav class="navbar" id="navbar">
+  <a href="#" class="nav-brand">
+    <img src="lixscout-logo.png" alt="Lixscout" style="height:32px;width:auto;object-fit:contain;">
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#fleet">
+      <span class="id">Armada</span><span class="en">Fleet</span>
+    </a></li>
+    <li><a href="#destinations">
+      <span class="id">Destinasi</span><span class="en">Destinations</span>
+    </a></li>
+    <li><a href="#how">
+      <span class="id">Cara Sewa</span><span class="en">How to Rent</span>
+    </a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#contact">
+      <span class="id">Kontak</span><span class="en">Contact</span>
+    </a></li>
+  </ul>
+
+  <div style="display:flex;align-items:center;gap:0.75rem;">
+    <button class="lang-toggle" id="langToggle" onclick="toggleLang()">EN</button>
+    <button class="mobile-menu-btn" id="mobileBtn" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile Drawer -->
+<div class="mobile-drawer" id="mobileDrawer" onclick="if(event.target===this)toggleMobile()">
+  <div class="mobile-drawer-inner">
+    <button class="mobile-drawer-close" onclick="toggleMobile()">✕</button>
+    <a href="#fleet" onclick="toggleMobile()"><span class="id">Armada</span><span class="en">Fleet</span></a>
+    <a href="#destinations" onclick="toggleMobile()"><span class="id">Destinasi</span><span class="en">Destinations</span></a>
+    <a href="#how" onclick="toggleMobile()"><span class="id">Cara Sewa</span><span class="en">How to Rent</span></a>
+    <a href="#faq" onclick="toggleMobile()">FAQ</a>
+    <a href="#contact" onclick="toggleMobile()"><span class="id">Kontak</span><span class="en">Contact</span></a>
+    <a href="https://wa.me/6281234567890?text=Halo%20Bayu%20Bali%20Motor%2C%20saya%20mau%20sewa%20motor" style="color:var(--terracotta);">📱 WhatsApp</a>
+  </div>
+</div>
+
+<!-- ======================== HERO ======================== -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="id">Terpercaya Sejak 2018</span>
+      <span class="en">Trusted Since 2018</span>
+    </div>
+    <h1>
+      <span class="id">Jelajahi Bali,<br><em>Bebaskan Jiwamu</em></span>
+      <span class="en">Explore Bali,<br><em>Free Your Soul</em></span>
+    </h1>
+    <p class="hero-sub">
+      <span class="id">Sewa motor terpercaya di Bali. Armada lengkap, harga transparan, antar jemput gratis. Mulai petualanganmu sekarang.</span>
+      <span class="en">Trusted motorbike rental in Bali. Full fleet, transparent pricing, free delivery. Start your adventure now.</span>
+    </p>
+    <div class="hero-ctas">
+      <a href="#fleet" class="btn btn-primary">
+        <span class="candi-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21L12 3L21 21"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="10" y1="14" x2="14" y2="14"/></svg></span>
+        <span class="id">Lihat Armada</span>
+        <span class="en">View Fleet</span>
+      </a>
+      <a href="https://wa.me/6281234567890?text=Halo%20Bayu%20Bali%20Motor%2C%20saya%20mau%20sewa%20motor" class="btn btn-outline" target="_blank">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span class="id">Chat WhatsApp</span>
+        <span class="en">WhatsApp Us</span>
+      </a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">2,500+</div>
+        <div class="hero-stat-label"><span class="id">Pelanggan Puas</span><span class="en">Happy Riders</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">85+</div>
+        <div class="hero-stat-label"><span class="id">Motor Siap Jalan</span><span class="en">Bikes Ready</span></div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4.9★</div>
+        <div class="hero-stat-label"><span class="id">Rating Google</span><span class="en">Google Rating</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">
+    <div class="mouse"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ======================== AVAILABILITY CHECKER ======================== -->
+<div class="checker-wrap">
+  <form class="checker" onsubmit="checkAvailability(event)">
+    <div>
+      <label><span class="id">Tanggal Sewa</span><span class="en">Rental Date</span></label>
+      <input type="date" id="rentDate" required>
+    </div>
+    <div>
+      <label><span class="id">Durasi</span><span class="en">Duration</span></label>
+      <select id="rentDuration">
+        <option value="1">1 <span class="id">Hari</span><span class="en">Day</span></option>
+        <option value="3">3 <span class="id">Hari</span><span class="en">Days</span></option>
+        <option value="7" selected>7 <span class="id">Hari</span><span class="en">Days</span></option>
+        <option value="14">14 <span class="id">Hari</span><span class="en">Days</span></option>
+        <option value="30">1 <span class="id">Bulan</span><span class="en">Month</span></option>
+      </select>
+    </div>
+    <div>
+      <label><span class="id">Tipe Motor</span><span class="en">Bike Type</span></label>
+      <select id="rentType">
+        <option value="all"><span class="id">Semua Tipe</span><span class="en">All Types</span></option>
+        <option value="matic">Matic / Scooter</option>
+        <option value="sport">Sport / Manual</option>
+        <option value="big">Big Bike (250cc+)</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-gold">
+      <span class="id">Cek Ketersediaan</span>
+      <span class="en">Check Availability</span>
+    </button>
+  </form>
+</div>
+
+<!-- ======================== POLENG DIVIDER ======================== -->
+<div class="poleng-divider thin"></div>
+
+<!-- ======================== FREE EXTRAS BAR ======================== -->
+<div style="background:var(--linen);padding:var(--sp-4) 0;">
+  <div class="extras-bar">
+    <div class="extra-item">
+      <svg viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="M8 6V4h8v2"/></svg>
+      <span class="id">Gratis Top Box</span><span class="en">Free Top Box</span>
+    </div>
+    <div class="extra-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8 2 4 6 4 10c0 2 1 3 2 4v6h12v-6c1-1 2-2 2-4 0-4-4-8-8-8z"/><path d="M9 22h6"/></svg>
+      <span class="id">Helm Segar</span><span class="en">Fresh Helmets</span>
+    </div>
+    <div class="extra-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 4 2-7L2 9h7z"/></svg>
+      <span class="id">Jas Hujan</span><span class="en">Raincoat</span>
+    </div>
+    <div class="extra-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <span class="id">Servis 24 Jam</span><span class="en">24h Maintenance</span>
+    </div>
+    <div class="extra-item">
+      <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span class="id">Cuci Motor 1x</span><span class="en">1x Free Wash</span>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== FLEET ======================== -->
+<section class="section fleet-bg" id="fleet">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">
+        <span class="id">Armada Kami</span><span class="en">Our Fleet</span>
+      </div>
+      <h2 class="section-title">
+        <span class="id">Pilih Motor Impianmu</span><span class="en">Choose Your Dream Ride</span>
+      </h2>
+      <p class="section-desc">
+        <span class="id">Semua motor terawat prima, bersih, dan siap menemani petualanganmu di Bali.</span>
+        <span class="en">All bikes are well-maintained, clean, and ready for your Bali adventure.</span>
+      </p>
+    </div>
+
+    <div class="fleet-tabs reveal">
+      <button class="fleet-tab active" onclick="filterFleet('all',this)">
+        <span class="id">Semua</span><span class="en">All</span>
+      </button>
+      <button class="fleet-tab" onclick="filterFleet('matic',this)">Matic</button>
+      <button class="fleet-tab" onclick="filterFleet('sport',this)">Sport</button>
+      <button class="fleet-tab" onclick="filterFleet('big',this)">Big Bike</button>
+    </div>
+
+    <div class="fleet-grid" id="fleetGrid">
+      <!-- Honda Vario 125 -->
+      <div class="bike-card reveal" data-type="matic">
+        <div class="bike-img">
+          <img src="img/bike-vario.jpg" alt="Honda Vario 125" loading="lazy">
+          <span class="bike-badge">Populer</span>
+        </div>
+        <div class="bike-info">
+          <h3 class="bike-name">Honda Vario 125</h3>
+          <div class="bike-spec">
+            <span>⚡ 125cc</span>
+            <span>🛢️ <span class="id">Irit BBM</span><span class="en">Fuel Efficient</span></span>
+          </div>
+          <div class="bike-price-row">
+            <div class="bike-price">Rp 75.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20Vario%20125" class="bike-book" target="_blank">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Honda Scoopy -->
+      <div class="bike-card reveal" data-type="matic">
+        <div class="bike-img">
+          <img src="img/bike-scoopy.jpg" alt="Honda Scoopy" loading="lazy">
+        </div>
+        <div class="bike-info">
+          <h3 class="bike-name">Honda Scoopy</h3>
+          <div class="bike-spec">
+            <span>⚡ 110cc</span>
+            <span>🎨 <span class="id">Retro Stylish</span><span class="en">Retro Stylish</span></span>
+          </div>
+          <div class="bike-price-row">
+            <div class="bike-price">Rp 80.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20Scoopy" class="bike-book" target="_blank">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Yamaha NMAX -->
+      <div class="bike-card reveal" data-type="matic">
+        <div class="bike-img">
+          <img src="img/bike-nmax.jpg" alt="Yamaha NMAX" loading="lazy">
+          <span class="bike-badge" style="background:var(--terracotta);">Premium</span>
+        </div>
+        <div class="bike-info">
+          <h3 class="bike-name">Yamaha NMAX 155</h3>
+          <div class="bike-spec">
+            <span>⚡ 155cc</span>
+            <span>🛡️ ABS</span>
+          </div>
+          <div class="bike-price-row">
+            <div class="bike-price">Rp 120.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Yamaha%20NMAX" class="bike-book" target="_blank">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Honda PCX -->
+      <div class="bike-card reveal" data-type="matic">
+        <div class="bike-img">
+          <img src="img/bike-pcx.jpg" alt="Honda PCX 160" loading="lazy">
+          <span class="bike-badge" style="background:var(--gold);color:var(--ink);">Best Seller</span>
+        </div>
+        <div class="bike-info">
+          <h3 class="bike-name">Honda PCX 160</h3>
+          <div class="bike-spec">
+            <span>⚡ 160cc</span>
+            <span>🔇 <span class="id">Super Halus</span><span class="en">Ultra Smooth</span></span>
+          </div>
+          <div class="bike-price-row">
+            <div class="bike-price">Rp 150.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20PCX%20160" class="bike-book" target="_blank">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Honda CB150R -->
+      <div class="bike-card reveal" data-type="sport">
+        <div class="bike-img">
+          <img src="img/bike-cb150r.jpg" alt="Honda CB150R" loading="lazy">
+        </div>
+        <div class="bike-info">
+          <h3 class="bike-name">Honda CB150R</h3>
+          <div class="bike-spec">
+            <span>⚡ 150cc</span>
+            <span>🏎️ <span class="id">Sport Naked</span><span class="en">Sport Naked</span></span>
+          </div>
+          <div class="bike-price-row">
+            <div class="bike-price">Rp 150.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20CB150R" class="bike-book" target="_blank">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Yamaha XMAX -->
+      <div class="bike-card reveal" data-type="big">
+        <div class="bike-img">
+          <img src="img/bike-xmax.jpg" alt="Yamaha XMAX 250" loading="lazy">
+          <span class="bike-badge" style="background:var(--terracotta);">Big Bike</span>
+        </div>
+        <div class="bike-info">
+          <h3 class="bike-name">Yamaha XMAX 250</h3>
+          <div class="bike-spec">
+            <span>⚡ 250cc</span>
+            <span>🛣️ <span class="id">Touring King</span><span class="en">Touring King</span></span>
+          </div>
+          <div class="bike-price-row">
+            <div class="bike-price">Rp 250.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Yamaha%20XMAX%20250" class="bike-book" target="_blank">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Honda CRF -->
+      <div class="bike-card reveal" data-type="sport">
+        <div class="bike-img">
+          <img src="img/bike-crf.jpg" alt="Honda CRF 150L" loading="lazy">
+        </div>
+        <div class="bike-info">
+          <h3 class="bike-name">Honda CRF 150L</h3>
+          <div class="bike-spec">
+            <span>⚡ 150cc</span>
+            <span>⛰️ <span class="id">Off-Road</span><span class="en">Off-Road</span></span>
+          </div>
+          <div class="bike-price-row">
+            <div class="bike-price">Rp 175.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20CRF%20150L" class="bike-book" target="_blank">Book Now</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Kawasaki W175 -->
+      <div class="bike-card reveal" data-type="sport">
+        <div class="bike-img">
+          <img src="img/bike-w175.jpg" alt="Kawasaki W175" loading="lazy">
+        </div>
+        <div class="bike-info">
+          <h3 class="bike-name">Kawasaki W175</h3>
+          <div class="bike-spec">
+            <span>⚡ 175cc</span>
+            <span>🎩 <span class="id">Klasik Retro</span><span class="en">Classic Retro</span></span>
+          </div>
+          <div class="bike-price-row">
+            <div class="bike-price">Rp 175.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
+            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Kawasaki%20W175" class="bike-book" target="_blank">Book Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== POLENG DIVIDER ======================== -->
+<div class="poleng-divider"></div>
+
+<!-- ======================== DISCOUNT BANNER ======================== -->
+<div class="discount-banner">
+  <h3><span class="id">🎉 Diskon 5% Sewa Pertama!</span><span class="en">🎉 5% Off Your First Rental!</span></h3>
+  <p><span class="id">Pesan sekarang dan dapatkan diskon spesial untuk pelanggan baru.</span><span class="en">Book now and get a special discount for new customers.</span></p>
+  <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20klaim%20diskon%205%25%20sewa%20pertama" class="btn btn-primary" target="_blank">
+    <span class="id">Klaim Diskon</span><span class="en">Claim Discount</span>
+  </a>
+</div>
+
+<!-- ======================== WHY US ======================== -->
+<section class="section whyus-bg" id="whyus">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">
+        <span class="id">Kenapa Pilih Kami</span><span class="en">Why Choose Us</span>
+      </div>
+      <h2 class="section-title">
+        <span class="id">Lebih dari Sekadar Sewa Motor</span><span class="en">More Than Just a Rental</span>
+      </h2>
+    </div>
+
+    <div class="whyus-grid">
+      <div class="whyus-card reveal">
+        <div class="whyus-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="whyus-title">
+          <span class="id">Antar Jemput Gratis</span><span class="en">Free Delivery</span>
+        </h3>
+        <p class="whyus-desc">
+          <span class="id">Kami antar motor ke bandara, hotel, atau vila kamu. Gratis area Kuta, Seminyak, Denpasar.</span>
+          <span class="en">We deliver your bike to the airport, hotel, or villa. Free within Kuta, Seminyak, Denpasar.</span>
+        </p>
+      </div>
+
+      <div class="whyus-card reveal">
+        <div class="whyus-icon">
+          <svg viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/></svg>
+        </div>
+        <h3 class="whyus-title">
+          <span class="id">Motor Terawat</span><span class="en">Well-Maintained</span>
+        </h3>
+        <p class="whyus-desc">
+          <span class="id">Setiap motor di-servis rutin dan dibersihkan sebelum disewakan. Keamanan prioritas utama kami.</span>
+          <span class="en">Every bike is regularly serviced and cleaned before rental. Safety is our top priority.</span>
+        </p>
+      </div>
+
+      <div class="whyus-card reveal">
+        <div class="whyus-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <h3 class="whyus-title">
+          <span class="id">Harga Transparan</span><span class="en">Transparent Pricing</span>
+        </h3>
+        <p class="whyus-desc">
+          <span class="id">Tidak ada biaya tersembunyi. Harga yang kamu lihat adalah harga final. Termasuk asuransi dasar.</span>
+          <span class="en">No hidden fees. The price you see is the final price. Basic insurance included.</span>
+        </p>
+      </div>
+
+      <div class="whyus-card reveal">
+        <div class="whyus-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        </div>
+        <h3 class="whyus-title">
+          <span class="id">Support 24/7</span><span class="en">24/7 Support</span>
+        </h3>
+        <p class="whyus-desc">
+          <span class="id">Tim kami siap membantu kapan saja via WhatsApp. Darurat di jalan? Kami segera ke lokasi.</span>
+          <span class="en">Our team is ready to help anytime via WhatsApp. Breakdown? We come to you immediately.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== PATRA BORDER ======================== -->
+<div class="patra-border-top"></div>
+
+<!-- ======================== DESTINATIONS ======================== -->
+<section class="section dest-bg" id="destinations">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">
+        <span class="id">Rute Populer</span><span class="en">Popular Routes</span>
+      </div>
+      <h2 class="section-title">
+        <span class="id">Temukan Destinasi Impian</span><span class="en">Discover Dream Destinations</span>
+      </h2>
+      <p class="section-desc">
+        <span class="id">Jelajahi tempat-tempat terbaik Bali dengan motor. Estimasi perjalanan dari Kuta.</span>
+        <span class="en">Explore Bali's best spots by motorbike. Travel estimates from Kuta.</span>
+      </p>
+    </div>
+  </div>
+  <div class="dest-scroll" style="padding-left:var(--sp-5);padding-right:var(--sp-5);">
+    <div class="dest-card reveal">
+      <img src="img/dest-ubud.jpg" alt="Ubud" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Ubud</div>
+        <div class="dest-info">
+          <span>🕐 1.5 jam</span>
+          <span>📍 35 km</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="img/dest-uluwatu.jpg" alt="Uluwatu" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Uluwatu</div>
+        <div class="dest-info">
+          <span>🕐 1 jam</span>
+          <span>📍 22 km</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="img/dest-tanahlot.jpg" alt="Tanah Lot" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Tanah Lot</div>
+        <div class="dest-info">
+          <span>🕐 1 jam</span>
+          <span>📍 20 km</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="img/dest-kintamani.jpg" alt="Kintamani" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Kintamani</div>
+        <div class="dest-info">
+          <span>🕐 2 jam</span>
+          <span>📍 55 km</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="img/dest-nusapenida.jpg" alt="Nusa Penida" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Nusa Penida</div>
+        <div class="dest-info">
+          <span>🕐 45 mnt + ferry</span>
+          <span>📍 Sanur Harbor</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="img/dest-sidemen.jpg" alt="Sidemen" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Sidemen</div>
+        <div class="dest-info">
+          <span>🕐 1.5 jam</span>
+          <span>📍 40 km</span>
+        </div>
+      </div>
+    </div>
+    <div class="dest-card reveal">
+      <img src="img/dest-bedugul.jpg" alt="Bedugul" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Bedugul</div>
+        <div class="dest-info">
+          <span>🕐 2 jam</span>
+          <span>📍 50 km</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== PATRA BORDER ======================== -->
+<div class="patra-border-bottom"></div>
+
+<!-- ======================== HOW TO RENT ======================== -->
+<section class="section" id="how" style="background:var(--linen);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">
+        <span class="id">Cara Sewa</span><span class="en">How to Rent</span>
+      </div>
+      <h2 class="section-title">
+        <span class="id">3 Langkah Mudah</span><span class="en">3 Easy Steps</span>
+      </h2>
+    </div>
+
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <div class="step-num">1</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="12" y="8" width="40" height="48" rx="4" stroke="#C1440E" stroke-width="2"/>
+            <path d="M20 20h24M20 28h24M20 36h16" stroke="#C1440E" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="44" cy="44" r="12" fill="#4A7C59" opacity="0.2" stroke="#4A7C59" stroke-width="2"/>
+            <path d="M40 44l3 3 5-6" stroke="#4A7C59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="step-title">
+          <span class="id">Pilih & Pesan</span><span class="en">Choose & Book</span>
+        </h3>
+        <p class="step-desc">
+          <span class="id">Pilih motor yang kamu suka, tentukan tanggal, lalu hubungi kami via WhatsApp atau form booking.</span>
+          <span class="en">Pick your favorite bike, set the dates, then contact us via WhatsApp or booking form.</span>
+        </p>
+      </div>
+
+      <div class="step-card reveal">
+        <div class="step-num">2</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M8 40h48" stroke="#D4A017" stroke-width="2"/>
+            <rect x="12" y="28" width="40" height="16" rx="3" stroke="#D4A017" stroke-width="2"/>
+            <circle cx="20" cy="44" r="6" stroke="#D4A017" stroke-width="2"/>
+            <circle cx="44" cy="44" r="6" stroke="#D4A017" stroke-width="2"/>
+            <path d="M24 24l8-8 8 8" stroke="#D4A017" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M32 16v12" stroke="#D4A017" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <h3 class="step-title">
+          <span class="id">Kami Antar</span><span class="en">We Deliver</span>
+        </h3>
+        <p class="step-desc">
+          <span class="id">Motor diantar ke lokasi kamu — bandara, hotel, atau vila. Gratis untuk area Kuta, Seminyak, Denpasar.</span>
+          <span class="en">Your bike is delivered to your location — airport, hotel, or villa. Free for Kuta, Seminyak, Denpasar.</span>
+        </p>
+      </div>
+
+      <div class="step-card reveal">
+        <div class="step-num">3</div>
+        <div class="step-icon">
+          <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="28" r="16" stroke="#4A7C59" stroke-width="2"/>
+            <path d="M24 28h12" stroke="#4A7C59" stroke-width="2" stroke-linecap="round"/>
+            <path d="M32 20v16" stroke="#4A7C59" stroke-width="2" stroke-linecap="round"/>
+            <path d="M16 52c4-6 10-8 16-8s12 2 16 8" stroke="#4A7C59" stroke-width="2" stroke-linecap="round"/>
+            <path d="M44 22l4-4 6 6" stroke="#4A7C59" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="step-title">
+          <span class="id">Jelajahi Bali!</span><span class="en">Explore Bali!</span>
+        </h3>
+        <p class="step-desc">
+          <span class="id">Nikmati perjalananmu! Helm, jas hujan, dan top box sudah termasuk. Support 24/7 jika butuh bantuan.</span>
+          <span class="en">Enjoy your ride! Helmet, raincoat, and top box included. 24/7 support if you need help.</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== POLENG DIVIDER ======================== -->
+<div class="poleng-divider"></div>
+
+<!-- ======================== TESTIMONIALS ======================== -->
+<section class="section testi-bg" id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">Testimoni</div>
+      <h2 class="section-title">
+        <span class="id">Kata Mereka</span><span class="en">What They Say</span>
+      </h2>
+      <p class="section-desc">
+        <span class="id">Ribuan pelanggan dari seluruh dunia telah mempercayai kami.</span>
+        <span class="en">Thousands of customers from around the world have trusted us.</span>
+      </p>
+    </div>
+
+    <div class="testi-grid">
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">
+          <span class="id">"Motor diantar tepat waktu ke hotel. Kondisi prima dan bersih. Perjalanan Kuta ke Ubud lancar banget! Recommended!"</span>
+          <span class="en">"Bike was delivered on time to the hotel. Great condition and clean. Kuta to Ubud trip was smooth! Highly recommended!"</span>
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar">MR</div>
+          <div>
+            <div class="testi-name">Marcus R.</div>
+            <div class="testi-origin">Berlin, Jerman</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">
+          <span class="id">"Ini kali ke-3 saya sewa di Lixscout. Pelayanan selalu konsisten, harga jujur, dan motor terawat. Top!"</span>
+          <span class="en">"This is my 3rd time renting from Lixscout. Service is always consistent, honest pricing, and well-maintained bikes. Top!"</span>
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar">SA</div>
+          <div>
+            <div class="testi-name">Siti A.</div>
+            <div class="testi-origin">Jakarta, Indonesia</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">
+          <span class="id">"Ban bocor di tengah jalan, WhatsApp mereka dan 30 menit langsung ada teknisi datang. Luar biasa!"</span>
+          <span class="en">"Got a flat tire in the middle of nowhere, WhatsApped them and a mechanic arrived in 30 minutes. Incredible!"</span>
+        </p>
+        <div class="testi-author">
+          <div class="testi-avatar">JT</div>
+          <div>
+            <div class="testi-name">Jake T.</div>
+            <div class="testi-origin">Melbourne, Australia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== FAQ ======================== -->
+<section class="section" id="faq" style="background:white;">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="section-label">FAQ</div>
+      <h2 class="section-title">
+        <span class="id">Pertanyaan Umum</span><span class="en">Frequently Asked</span>
+      </h2>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="id">Apakah perlu SIM untuk sewa motor?</span><span class="en">Do I need a license to rent?</span></span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="id">Ya, Anda memerlukan SIM C (Indonesia) atau International Driving Permit (IDP) dengan kategori motor. Untuk wisatawan asing, pastikan IDP Anda mencakup kategori A/motor.</span>
+          <span class="en">Yes, you need a Class C license (Indonesian) or an International Driving Permit (IDP) with motorcycle endorsement. For foreign tourists, make sure your IDP covers category A/motorcycle.</span>
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="id">Apakah asuransi sudah termasuk?</span><span class="en">Is insurance included?</span></span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="id">Ya, semua harga sudah termasuk asuransi dasar yang menanggung kerusakan akibat kecelakaan. Kami juga menyediakan asuransi premium (all-risk) dengan tambahan biaya Rp 25.000/hari.</span>
+          <span class="en">Yes, all prices include basic insurance covering accident damage. We also offer premium all-risk insurance for an additional Rp 25,000/day.</span>
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="id">Area antar jemput gratis sampai mana?</span><span class="en">What's the free delivery area?</span></span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="id">Antar jemput gratis untuk area Kuta, Seminyak, Denpasar, dan Bandara Ngurah Rai. Untuk area Ubud, Canggu, dan Uluwatu dikenakan biaya antar Rp 50.000.</span>
+          <span class="en">Free delivery for Kuta, Seminyak, Denpasar, and Ngurah Rai Airport. Ubud, Canggu, and Uluwatu delivery is Rp 50,000.</span>
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="id">Bagaimana jika motor mogok di jalan?</span><span class="en">What if the bike breaks down?</span></span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="id">Hubungi kami via WhatsApp dan teknisi akan datang ke lokasi Anda dalam 30-60 menit (tergantung lokasi). Jika motor tidak bisa diperbaiki di tempak, kami ganti dengan motor lain. Layanan ini tersedia 24 jam.</span>
+          <span class="en">Contact us via WhatsApp and a mechanic will arrive at your location within 30-60 minutes (depending on location). If the bike can't be fixed on-site, we'll replace it. This service is available 24/7.</span>
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="id">Bisa sewa per jam atau half-day?</span><span class="en">Can I rent by the hour or half-day?</span></span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="id">Saat ini kami hanya menyewakan per hari (24 jam). Namun, jika Anda hanya butuh beberapa jam, silakan hubungi kami — kami bisa nego harga khusus untuk durasi pendek.</span>
+          <span class="en">Currently we only rent by the day (24 hours). However, if you only need a few hours, contact us — we can negotiate a special rate for shorter durations.</span>
+        </div></div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          <span><span class="id">Metode pembayaran apa yang diterima?</span><span class="en">What payment methods do you accept?</span></span>
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <div class="faq-a"><div class="faq-a-inner">
+          <span class="id">Kami menerima tunai (IDR), transfer bank (BCA, Mandiri, BNI), GoPay, OVO, Dana, dan kartu kredit/debit. Pembayaran dilakukan saat motor diantar.</span>
+          <span class="en">We accept cash (IDR), bank transfer (BCA, Mandiri, BNI), GoPay, OVO, Dana, and credit/debit cards. Payment is made upon delivery.</span>
+        </div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================== CTA BANNER ======================== -->
+<section class="cta-banner" id="contact">
+  <h2>
+    <span class="id">Siap Menjelajahi Bali?</span>
+    <span class="en">Ready to Explore Bali?</span>
+  </h2>
+  <p>
+    <span class="id">Pesan sekarang via WhatsApp dan dapatkan motor impianmu hari ini juga.</span>
+    <span class="en">Book now via WhatsApp and get your dream bike today.</span>
+  </p>
+  <a href="https://wa.me/6281234567890?text=Halo%20Bayu%20Bali%20Motor%2C%20saya%20mau%20sewa%20motor" class="btn btn-gold" target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span class="id">Chat WhatsApp</span>
+    <span class="en">WhatsApp Us</span>
+  </a>
+</section>
+
+<!-- ======================== FOOTER ======================== -->
+<div class="poleng-divider"></div>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">
+        <img src="lixscout-logo.png" alt="Lixscout" style="height:36px;width:auto;object-fit:contain;border-radius:6px;">
+        Lixscout
+      </div>
+      <p class="footer-desc">
+        <span class="id">Sewa motor terpercaya di Bali sejak 2018. Melayani ribuan wisatawan dari seluruh dunia dengan armada premium dan pelayanan terbaik.</span>
+        <span class="en">Trusted motorbike rental in Bali since 2018. Serving thousands of tourists worldwide with premium fleet and best service.</span>
+      </p>
+      <div class="footer-social">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 104 4V4a5 5 0 005 5"/></svg></a>
+      </div>
+    </div>
+
+    <div>
+      <h4><span class="id">Tautan</span><span class="en">Quick Links</span></h4>
+      <ul class="footer-links">
+        <li><a href="#fleet"><span class="id">Armada</span><span class="en">Fleet</span></a></li>
+        <li><a href="#destinations"><span class="id">Destinasi</span><span class="en">Destinations</span></a></li>
+        <li><a href="#how"><span class="id">Cara Sewa</span><span class="en">How to Rent</span></a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#testimonials">Testimoni</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4><span class="id">Layanan</span><span class="en">Services</span></h4>
+      <ul class="footer-links">
+        <li><a href="#"><span class="id">Sewa Harian</span><span class="en">Daily Rental</span></a></li>
+        <li><a href="#"><span class="id">Sewa Bulanan</span><span class="en">Monthly Rental</span></a></li>
+        <li><a href="#"><span class="id">Antar Jemput</span><span class="en">Delivery Service</span></a></li>
+        <li><a href="#"><span class="id">Tour Guide</span><span class="en">Tour Guide</span></a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h4><span class="id">Kontak</span><span class="en">Contact</span></h4>
+      <p>📍 Jl. Sunset Road No. 88, Kuta, Bali</p>
+      <p>📞 <a href="tel:+6281234567890">+62 812-3456-7890</a></p>
+      <p>✉️ <a href="mailto:hello@lixscout.com">hello@lixscout.com</a></p>
+      <p>🕐 <span class="id">Buka Setiap Hari 07:00 - 22:00</span><span class="en">Open Daily 07:00 - 22:00</span></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2024 Lixscout. <span class="id">Hak cipta dilindungi.</span><span class="en">All rights reserved.</span></p>
+    <p style="display:flex;align-items:center;gap:0.3rem;">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="rgba(245,239,230,0.4)" stroke-width="2"><path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z"/></svg>
+      <span class="id">Kuta, Bali, Indonesia</span>
+      <span class="en">Kuta, Bali, Indonesia</span>
+    </p>
+  </div>
+</footer>
+
+<!-- ======================== WHATSAPP FLOATING ======================== -->
+<a href="https://wa.me/6281234567890?text=Halo%20Bayu%20Bali%20Motor%2C%20saya%20mau%20sewa%20motor" class="wa-float" target="_blank" id="waFloat" aria-label="Chat WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+<div class="wa-tooltip" id="waTooltip">
+  <span class="id">💬 Chat Kami!</span>
+  <span class="en">💬 Chat Us!</span>
+</div>
+
+<!-- ======================== MOBILE STICKY CTA BAR ======================== -->
+<div class="mobile-cta-bar" id="mobileCtaBar">
+  <a href="https://wa.me/6281234567890?text=Halo%20Bayu%20Bali%20Motor%2C%20saya%20mau%20sewa%20motor" class="btn btn-primary" target="_blank">
+    <span class="id">📱 Booking Sekarang</span>
+    <span class="en">📱 Book Now</span>
+  </a>
+  <a href="#fleet" class="btn btn-gold">
+    <span class="id">Lihat Armada</span>
+    <span class="en">View Fleet</span>
+  </a>
+</div>
+
+<!-- ======================== JAVASCRIPT ======================== -->
+<script>
+// ====== Loader ======
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('loader').classList.add('hidden');
+  }, 1800);
+});
+
+// ====== Navbar Scroll ======
+const navbar = document.getElementById('navbar');
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const y = window.scrollY;
+  navbar.classList.toggle('scrolled', y > 60);
+  lastScroll = y;
+}, { passive: true });
+
+// ====== Mobile Menu ======
+function toggleMobile() {
+  const btn = document.getElementById('mobileBtn');
+  const drawer = document.getElementById('mobileDrawer');
+  btn.classList.toggle('active');
+  drawer.classList.toggle('open');
+  document.body.style.overflow = drawer.classList.contains('open') ? 'hidden' : '';
+}
+
+// ====== Language Toggle ======
+let currentLang = 'id';
+function toggleLang() {
+  currentLang = currentLang === 'id' ? 'en' : 'id';
+  document.documentElement.setAttribute('data-lang', currentLang);
+  document.getElementById('langToggle').textContent = currentLang === 'id' ? 'EN' : 'ID';
+  document.title = currentLang === 'id'
+    ? 'Lixscout — Sewa Motor Bali Terpercaya'
+    : 'Lixscout — Trusted Bali Motorbike Rental';
+}
+
+// ====== Fleet Filter ======
+function filterFleet(type, btn) {
+  document.querySelectorAll('.fleet-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.bike-card').forEach(card => {
+    const match = type === 'all' || card.dataset.type === type;
+    card.style.display = match ? '' : 'none';
+    if (match) {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(12px)';
+      requestAnimationFrame(() => {
+        card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      });
+    }
+  });
+}
+
+// ====== FAQ Toggle ======
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ====== Scroll Reveal ======
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 80);
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// ====== Set min date ======
+document.getElementById('rentDate').min = new Date().toISOString().split('T')[0];
+document.getElementById('rentDate').value = new Date().toISOString().split('T')[0];
+
+// ====== Check Availability ======
+function checkAvailability(e) {
+  e.preventDefault();
+  const date = document.getElementById('rentDate').value;
+  const duration = document.getElementById('rentDuration').value;
+  const type = document.getElementById('rentType');
+  const typeName = type.options[type.selectedIndex].text;
+  const msg = currentLang === 'id'
+    ? `Halo, saya mau cek ketersediaan motor ${typeName} untuk tanggal ${date}, durasi ${duration} hari.`
+    : `Hi, I'd like to check availability for ${typeName} on ${date} for ${duration} days.`;
+  
+  // GA4 event tracking
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'check_availability', {
+      'event_category': 'engagement',
+      'event_label': typeName,
+      'value': 1
+    });
+  }
+  // Meta Pixel event
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Search', { content_name: typeName, search_string: date });
+  }
+  
+  window.open(`https://wa.me/6281234567890?text=${encodeURIComponent(msg)}`, '_blank');
+}
+
+// ====== WA Tooltip ======
+setTimeout(() => {
+  const tooltip = document.getElementById('waTooltip');
+  tooltip.classList.add('show');
+  setTimeout(() => tooltip.classList.remove('show'), 4000);
+}, 5000);
+
+// ====== Analytics Event Tracking ======
+// Track WhatsApp clicks (GA4 + Meta Pixel)
+document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+  link.addEventListener('click', function() {
+    const bikeName = this.closest('.bike-card')?.querySelector('.bike-name')?.textContent || 'General';
+    // GA4 event
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'whatsapp_click', {
+        'event_category': 'engagement',
+        'event_label': bikeName,
+        'value': 1
+      });
+    }
+    // Meta Pixel event
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'Contact', { content_name: bikeName });
+    }
+  });
+});
+
+// Track bike booking clicks
+document.querySelectorAll('.bike-book').forEach(btn => {
+  btn.addEventListener('click', function() {
+    const bikeName = this.closest('.bike-card')?.querySelector('.bike-name')?.textContent || 'Unknown';
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'book_bike', {
+        'event_category': 'fleet',
+        'event_label': bikeName,
+        'value': 1
+      });
+    }
+  });
+});
+
+// ====== Smooth anchor scroll ======
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      const y = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
