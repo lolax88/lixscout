@@ -542,22 +542,24 @@ body {
   flex-wrap: wrap;
 }
 .fleet-tab {
-  padding: 0.5rem 1.3rem;
-  border-radius: 2rem;
-  border: 1.5px solid var(--linen-warm);
-  background: transparent;
+  padding: 0.5rem 1.4rem;
+  border-radius: 4px;
+  border: 1.5px solid var(--ink);
+  background: white;
   font-family: var(--font-body);
   font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--stone);
+  font-weight: 600;
+  color: var(--ink);
   cursor: pointer;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
-.fleet-tab:hover { border-color: var(--gold); color: var(--gold); }
+.fleet-tab:hover { background: #f5f5f5; }
 .fleet-tab.active {
-  background: var(--terracotta);
+  background: var(--ink);
   color: white;
-  border-color: var(--terracotta);
+  border-color: var(--ink);
 }
 
 .fleet-grid {
@@ -567,40 +569,22 @@ body {
 }
 
 .bike-card {
-  background: var(--linen);
-  border: 1.5px solid rgba(212,160,23,0.2);
-  border-radius: 0.85rem;
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
   overflow: hidden;
-  transition: all 0.3s var(--ease-out);
+  transition: all 0.25s var(--ease-out);
   position: relative;
 }
-.bike-card::before {
-  content: '';
-  position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
-  border: 1px solid rgba(212,160,23,0.1);
-  border-radius: 0.6rem;
-  pointer-events: none;
-  transition: border-color 0.3s ease;
-}
 .bike-card:hover {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: var(--gold);
-}
-.bike-card:hover::before { border-color: rgba(212,160,23,0.25); }
-
-/* Patra corner ornament */
-.bike-card::after {
-  content: '';
-  position: absolute; top: 12px; right: 12px;
-  width: 24px; height: 24px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 2 Q18 8 12 12 Q6 8 12 2' fill='%23D4A017' opacity='0.3'/%3E%3Cpath d='M12 12 Q18 16 12 22 Q6 16 12 12' fill='%23D4A017' opacity='0.2'/%3E%3C/svg%3E") no-repeat center/contain;
-  z-index: 1;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  border-color: #ccc;
 }
 
 .bike-img {
-  width: 100%; height: 190px;
-  background: var(--linen-warm);
+  width: 100%; height: 200px;
+  background: #f8f8f8;
   display: flex; align-items: center; justify-content: center;
   overflow: hidden;
   position: relative;
@@ -609,7 +593,7 @@ body {
   width: 100%; height: 100%; object-fit: cover;
   transition: transform 0.4s ease;
 }
-.bike-card:hover .bike-img img { transform: scale(1.05); }
+.bike-card:hover .bike-img img { transform: scale(1.03); }
 .bike-badge {
   position: absolute; top: 12px; left: 12px;
   background: var(--green);
@@ -617,13 +601,13 @@ body {
   font-size: 0.65rem;
   font-weight: 700;
   padding: 0.25rem 0.6rem;
-  border-radius: 0.25rem;
+  border-radius: 3px;
   letter-spacing: 0.06em;
   text-transform: uppercase;
 }
 
 .bike-info {
-  padding: var(--sp-4);
+  padding: 1.25rem 1.25rem 1rem;
 }
 .bike-name {
   font-family: var(--font-display);
@@ -640,30 +624,78 @@ body {
 }
 .bike-spec span { display: flex; align-items: center; gap: 0.25rem; }
 
-.bike-price-row {
-  display: flex; align-items: center; justify-content: space-between;
-  padding-top: var(--sp-3);
-  border-top: 1px solid var(--linen-warm);
+/* Price toggle tabs inside card */
+.bike-toggle {
+  display: flex;
+  gap: 0;
+  margin-bottom: 0.75rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  overflow: hidden;
 }
-.bike-price {
+.bike-toggle-btn {
+  flex: 1;
+  padding: 0.35rem 0.5rem;
+  background: white;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--stone);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+.bike-toggle-btn.active {
+  background: var(--ink);
+  color: white;
+}
+
+.bike-pricing {
+  margin-bottom: 0.75rem;
+}
+.bike-price-main {
   font-family: var(--font-display);
   font-size: var(--text-xl);
   font-weight: 700;
-  color: var(--terracotta);
+  color: var(--ink);
+  margin-bottom: 0.15rem;
 }
-.bike-price small {
+.bike-price-usd {
   font-family: var(--font-body);
   font-size: var(--text-xs);
-  font-weight: 400;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 0.15rem;
+}
+.bike-price-period {
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
   color: var(--stone);
 }
 
+.bike-cc {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--ink-light);
+  background: #f5f5f5;
+  padding: 0.25rem 0.6rem;
+  border-radius: 3px;
+  margin-bottom: 0.75rem;
+}
+
 .bike-book {
-  padding: 0.5rem 1.2rem;
-  border-radius: 0.4rem;
-  background: var(--gold);
-  color: var(--ink);
-  font-size: var(--text-xs);
+  display: block;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  border-radius: 4px;
+  background: var(--ink);
+  color: white;
+  font-size: var(--text-sm);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
@@ -673,14 +705,74 @@ body {
   transition: all 0.2s ease;
   font-family: var(--font-body);
   min-height: 44px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 }
 .bike-book:hover {
   background: var(--terracotta);
   color: white;
-  transform: scale(1.03);
+}
+
+/* Fleet Feature Boxes */
+.fleet-features {
+  background: white;
+  padding: var(--sp-5) 0;
+}
+.fleet-features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-4);
+}
+.fleet-feature-box {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.06);
+  transition: all 0.2s ease;
+}
+.fleet-feature-box:hover {
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+.fleet-feature-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  border-radius: 4px;
+}
+.fleet-feature-content {
+  flex: 1;
+}
+.fleet-feature-title {
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
+  font-weight: 700;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.fleet-feature-desc {
+  font-size: var(--text-xs);
+  color: var(--stone);
+  line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  .fleet-features-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (max-width: 560px) {
+  .fleet-features-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ============================
@@ -1580,161 +1672,238 @@ body {
         <span class="id">Semua</span><span class="en">All</span>
       </button>
       <button class="fleet-tab" onclick="filterFleet('matic',this)">Matic</button>
-      <button class="fleet-tab" onclick="filterFleet('sport',this)">Sport</button>
       <button class="fleet-tab" onclick="filterFleet('big',this)">Big Bike</button>
+      <button class="fleet-tab" onclick="filterFleet('sport',this)">Sport</button>
+      <button class="fleet-tab" onclick="filterFleet('retro',this)">Retro</button>
     </div>
 
     <div class="fleet-grid" id="fleetGrid">
       <!-- Honda Vario 125 -->
-      <div class="bike-card reveal" data-type="matic">
+      <div class="bike-card reveal" data-type="matic" data-price-day="75000" data-price-month="1500000">
         <div class="bike-img">
           <img src="img/bike-vario.jpg" alt="Honda Vario 125" loading="lazy">
           <span class="bike-badge">Populer</span>
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Honda Vario 125</h3>
-          <div class="bike-spec">
-            <span>⚡ 125cc</span>
-            <span>🛢️ <span class="id">Irit BBM</span><span class="en">Fuel Efficient</span></span>
+          <div class="bike-toggle">
+            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
+            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
-          <div class="bike-price-row">
-            <div class="bike-price">Rp 75.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20Vario%20125" class="bike-book" target="_blank">Book Now</a>
+          <div class="bike-pricing">
+            <div class="bike-price-main" data-day="Rp 75.000" data-month="Rp 1.500.000">Rp 75.000</div>
+            <div class="bike-price-usd" data-day="~$5 USD" data-month="~$95 USD">~$5 USD</div>
+            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
+          <div class="bike-cc">⚡ 125cc</div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20Vario%20125" class="bike-book" target="_blank">
+            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
+          </a>
         </div>
       </div>
 
       <!-- Honda Scoopy -->
-      <div class="bike-card reveal" data-type="matic">
+      <div class="bike-card reveal" data-type="retro" data-price-day="80000" data-price-month="1600000">
         <div class="bike-img">
           <img src="img/bike-scoopy.jpg" alt="Honda Scoopy" loading="lazy">
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Honda Scoopy</h3>
-          <div class="bike-spec">
-            <span>⚡ 110cc</span>
-            <span>🎨 <span class="id">Retro Stylish</span><span class="en">Retro Stylish</span></span>
+          <div class="bike-toggle">
+            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
+            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
-          <div class="bike-price-row">
-            <div class="bike-price">Rp 80.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20Scoopy" class="bike-book" target="_blank">Book Now</a>
+          <div class="bike-pricing">
+            <div class="bike-price-main" data-day="Rp 80.000" data-month="Rp 1.600.000">Rp 80.000</div>
+            <div class="bike-price-usd" data-day="~$5 USD" data-month="~$100 USD">~$5 USD</div>
+            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
+          <div class="bike-cc">⚡ 110cc</div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20Scoopy" class="bike-book" target="_blank">
+            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
+          </a>
         </div>
       </div>
 
       <!-- Yamaha NMAX -->
-      <div class="bike-card reveal" data-type="matic">
+      <div class="bike-card reveal" data-type="matic" data-price-day="120000" data-price-month="2400000">
         <div class="bike-img">
           <img src="img/bike-nmax.jpg" alt="Yamaha NMAX" loading="lazy">
           <span class="bike-badge" style="background:var(--terracotta);">Premium</span>
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Yamaha NMAX 155</h3>
-          <div class="bike-spec">
-            <span>⚡ 155cc</span>
-            <span>🛡️ ABS</span>
+          <div class="bike-toggle">
+            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
+            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
-          <div class="bike-price-row">
-            <div class="bike-price">Rp 120.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Yamaha%20NMAX" class="bike-book" target="_blank">Book Now</a>
+          <div class="bike-pricing">
+            <div class="bike-price-main" data-day="Rp 120.000" data-month="Rp 2.400.000">Rp 120.000</div>
+            <div class="bike-price-usd" data-day="~$8 USD" data-month="~$150 USD">~$8 USD</div>
+            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
+          <div class="bike-cc">⚡ 155cc</div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Yamaha%20NMAX" class="bike-book" target="_blank">
+            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
+          </a>
         </div>
       </div>
 
       <!-- Honda PCX -->
-      <div class="bike-card reveal" data-type="matic">
+      <div class="bike-card reveal" data-type="matic" data-price-day="150000" data-price-month="3000000">
         <div class="bike-img">
           <img src="img/bike-pcx.jpg" alt="Honda PCX 160" loading="lazy">
           <span class="bike-badge" style="background:var(--gold);color:var(--ink);">Best Seller</span>
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Honda PCX 160</h3>
-          <div class="bike-spec">
-            <span>⚡ 160cc</span>
-            <span>🔇 <span class="id">Super Halus</span><span class="en">Ultra Smooth</span></span>
+          <div class="bike-toggle">
+            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
+            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
-          <div class="bike-price-row">
-            <div class="bike-price">Rp 150.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20PCX%20160" class="bike-book" target="_blank">Book Now</a>
+          <div class="bike-pricing">
+            <div class="bike-price-main" data-day="Rp 150.000" data-month="Rp 3.000.000">Rp 150.000</div>
+            <div class="bike-price-usd" data-day="~$10 USD" data-month="~$190 USD">~$10 USD</div>
+            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
+          <div class="bike-cc">⚡ 160cc</div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20PCX%20160" class="bike-book" target="_blank">
+            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
+          </a>
         </div>
       </div>
 
       <!-- Honda CB150R -->
-      <div class="bike-card reveal" data-type="sport">
+      <div class="bike-card reveal" data-type="sport" data-price-day="150000" data-price-month="3000000">
         <div class="bike-img">
           <img src="img/bike-cb150r.jpg" alt="Honda CB150R" loading="lazy">
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Honda CB150R</h3>
-          <div class="bike-spec">
-            <span>⚡ 150cc</span>
-            <span>🏎️ <span class="id">Sport Naked</span><span class="en">Sport Naked</span></span>
+          <div class="bike-toggle">
+            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
+            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
-          <div class="bike-price-row">
-            <div class="bike-price">Rp 150.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20CB150R" class="bike-book" target="_blank">Book Now</a>
+          <div class="bike-pricing">
+            <div class="bike-price-main" data-day="Rp 150.000" data-month="Rp 3.000.000">Rp 150.000</div>
+            <div class="bike-price-usd" data-day="~$10 USD" data-month="~$190 USD">~$10 USD</div>
+            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
+          <div class="bike-cc">⚡ 150cc</div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20CB150R" class="bike-book" target="_blank">
+            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
+          </a>
         </div>
       </div>
 
       <!-- Yamaha XMAX -->
-      <div class="bike-card reveal" data-type="big">
+      <div class="bike-card reveal" data-type="big" data-price-day="250000" data-price-month="5000000">
         <div class="bike-img">
           <img src="img/bike-xmax.jpg" alt="Yamaha XMAX 250" loading="lazy">
           <span class="bike-badge" style="background:var(--terracotta);">Big Bike</span>
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Yamaha XMAX 250</h3>
-          <div class="bike-spec">
-            <span>⚡ 250cc</span>
-            <span>🛣️ <span class="id">Touring King</span><span class="en">Touring King</span></span>
+          <div class="bike-toggle">
+            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
+            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
-          <div class="bike-price-row">
-            <div class="bike-price">Rp 250.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Yamaha%20XMAX%20250" class="bike-book" target="_blank">Book Now</a>
+          <div class="bike-pricing">
+            <div class="bike-price-main" data-day="Rp 250.000" data-month="Rp 5.000.000">Rp 250.000</div>
+            <div class="bike-price-usd" data-day="~$16 USD" data-month="~$315 USD">~$16 USD</div>
+            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
+          <div class="bike-cc">⚡ 250cc</div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Yamaha%20XMAX%20250" class="bike-book" target="_blank">
+            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
+          </a>
         </div>
       </div>
 
       <!-- Honda CRF -->
-      <div class="bike-card reveal" data-type="sport">
+      <div class="bike-card reveal" data-type="sport" data-price-day="175000" data-price-month="3500000">
         <div class="bike-img">
           <img src="img/bike-crf.jpg" alt="Honda CRF 150L" loading="lazy">
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Honda CRF 150L</h3>
-          <div class="bike-spec">
-            <span>⚡ 150cc</span>
-            <span>⛰️ <span class="id">Off-Road</span><span class="en">Off-Road</span></span>
+          <div class="bike-toggle">
+            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
+            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
-          <div class="bike-price-row">
-            <div class="bike-price">Rp 175.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20CRF%20150L" class="bike-book" target="_blank">Book Now</a>
+          <div class="bike-pricing">
+            <div class="bike-price-main" data-day="Rp 175.000" data-month="Rp 3.500.000">Rp 175.000</div>
+            <div class="bike-price-usd" data-day="~$11 USD" data-month="~$220 USD">~$11 USD</div>
+            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
+          <div class="bike-cc">⚡ 150cc</div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20CRF%20150L" class="bike-book" target="_blank">
+            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
+          </a>
         </div>
       </div>
 
       <!-- Kawasaki W175 -->
-      <div class="bike-card reveal" data-type="sport">
+      <div class="bike-card reveal" data-type="retro" data-price-day="175000" data-price-month="3500000">
         <div class="bike-img">
           <img src="img/bike-w175.jpg" alt="Kawasaki W175" loading="lazy">
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Kawasaki W175</h3>
-          <div class="bike-spec">
-            <span>⚡ 175cc</span>
-            <span>🎩 <span class="id">Klasik Retro</span><span class="en">Classic Retro</span></span>
+          <div class="bike-toggle">
+            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
+            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
-          <div class="bike-price-row">
-            <div class="bike-price">Rp 175.000 <small>/<span class="id">hari</span><span class="en">day</span></small></div>
-            <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Kawasaki%20W175" class="bike-book" target="_blank">Book Now</a>
+          <div class="bike-pricing">
+            <div class="bike-price-main" data-day="Rp 175.000" data-month="Rp 3.500.000">Rp 175.000</div>
+            <div class="bike-price-usd" data-day="~$11 USD" data-month="~$220 USD">~$11 USD</div>
+            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
+          <div class="bike-cc">⚡ 175cc</div>
+          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Kawasaki%20W175" class="bike-book" target="_blank">
+            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
+          </a>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ======================== FEATURES ======================== -->
+<div class="fleet-features">
+  <div class="container">
+    <div class="fleet-features-grid">
+      <div class="fleet-feature-box">
+        <div class="fleet-feature-icon">🕐</div>
+        <div class="fleet-feature-content">
+          <h4 class="fleet-feature-title">24/7 Support</h4>
+          <p class="fleet-feature-desc"><span class="id">Tim kami siap membantu kapan saja, siang maupun malam.</span><span class="en">Our team is ready to assist you anytime, day or night.</span></p>
+        </div>
+      </div>
+      <div class="fleet-feature-box">
+        <div class="fleet-feature-icon">🏍️</div>
+        <div class="fleet-feature-content">
+          <h4 class="fleet-feature-title"><span class="id">Antar Jemput</span><span class="en">Doorstep Delivery</span></h4>
+          <p class="fleet-feature-desc"><span class="id">Motor diantar langsung ke hotel, bandara, atau lokasi Anda.</span><span class="en">We deliver the bike directly to your hotel, airport, or location.</span></p>
+        </div>
+      </div>
+      <div class="fleet-feature-box">
+        <div class="fleet-feature-icon">✅</div>
+        <div class="fleet-feature-content">
+          <h4 class="fleet-feature-title"><span class="id">Kualitas Premium</span><span class="en">Premium Quality</span></h4>
+          <p class="fleet-feature-desc"><span class="id">Semua motor terawat rutin, bersih, dan dalam kondisi prima.</span><span class="en">All bikes are regularly serviced, clean, and in excellent condition.</span></p>
+        </div>
+      </div>
+      <div class="fleet-feature-box">
+        <div class="fleet-feature-icon">💰</div>
+        <div class="fleet-feature-content">
+          <h4 class="fleet-feature-title"><span class="id">Harga Transparan</span><span class="en">Transparent Pricing</span></h4>
+          <p class="fleet-feature-desc"><span class="id">Tidak ada biaya tersembunyi. Harga yang Anda lihat adalah harga akhir.</span><span class="en">No hidden fees. The price you see is the final price.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- ======================== POLENG DIVIDER ======================== -->
 <div class="poleng-divider"></div>
@@ -2288,6 +2457,30 @@ function filterFleet(type, btn) {
       });
     }
   });
+}
+
+// ====== Price Toggle (Daily/Monthly) ======
+function togglePrice(btn, period) {
+  const card = btn.closest('.bike-card');
+  const pricing = card.querySelector('.bike-pricing');
+  const mainPrice = pricing.querySelector('.bike-price-main');
+  const usdPrice = pricing.querySelector('.bike-price-usd');
+  const periodLabel = pricing.querySelector('.bike-price-period');
+
+  // Update toggle buttons
+  card.querySelectorAll('.bike-toggle-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  // Switch prices
+  mainPrice.textContent = mainPrice.dataset[period];
+  usdPrice.textContent = usdPrice.dataset[period];
+
+  // Update period label
+  if (period === 'day') {
+    periodLabel.innerHTML = '<span class="id">/hari</span><span class="en">/day</span>';
+  } else {
+    periodLabel.innerHTML = '<span class="id">/bulan</span><span class="en">/month</span>';
+  }
 }
 
 // ====== FAQ Toggle ======
