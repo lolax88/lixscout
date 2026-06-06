@@ -1674,13 +1674,10 @@ body {
     </div>
 
     <div class="fleet-tabs reveal">
-      <button class="fleet-tab" onclick="filterFleet('all',this)">
-        <span class="id">Semua</span><span class="en">All</span>
-      </button>
-      <button class="fleet-tab" onclick="filterFleet('small',this)">Small</button>
-      <button class="fleet-tab" onclick="filterFleet('medium',this)">Medium</button>
-      <button class="fleet-tab active" onclick="filterFleet('large',this)">Large</button>
-      <button class="fleet-tab" onclick="filterFleet('xlarge',this)">Extra Large</button>
+      <button class="fleet-tab active" onclick="filterFleet('xlarge',this)">EXTRA LARGE</button>
+      <button class="fleet-tab" onclick="filterFleet('large',this)">LARGE</button>
+      <button class="fleet-tab" onclick="filterFleet('medium',this)">MEDIUM</button>
+      <button class="fleet-tab" onclick="filterFleet('small',this)">SMALL</button>
     </div>
 
     <div class="fleet-grid" id="fleetGrid">
@@ -1788,32 +1785,6 @@ body {
         </div>
       </div>
 
-      <!-- Honda CB150R -->
-      <div class="bike-card reveal" data-type="medium" data-price-day="150000" data-price-month="3000000">
-        <div class="bike-img">
-          <img src="img/bike-cb150r.jpg" alt="Honda CB150R" loading="lazy">
-        </div>
-        <div class="bike-info">
-          <h3 class="bike-name">Honda CB150R</h3>
-          <div class="bike-toggle">
-            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
-            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
-          </div>
-          <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 150.000" data-month="Rp 3.000.000">
-              <span class="price-usd" data-day="~$10" data-month="~$190">~$10</span>
-              <span class="price-slash">/</span>
-              <span class="price-idr" data-day="150.000 IDR" data-month="3.000.000 IDR">150.000 IDR</span>
-            </div>
-            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
-          </div>
-          <div class="bike-cc">⚡ 150cc</div>
-          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20CB150R" class="bike-book" target="_blank">
-            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
-          </a>
-        </div>
-      </div>
-
       <!-- Yamaha XMAX -->
       <div class="bike-card reveal" data-type="xlarge" data-price-day="250000" data-price-month="5000000">
         <div class="bike-img">
@@ -1840,57 +1811,6 @@ body {
         </div>
       </div>
 
-      <!-- Honda CRF -->
-      <div class="bike-card reveal" data-type="medium" data-price-day="175000" data-price-month="3500000">
-        <div class="bike-img">
-          <img src="img/bike-crf.jpg" alt="Honda CRF 150L" loading="lazy">
-        </div>
-        <div class="bike-info">
-          <h3 class="bike-name">Honda CRF 150L</h3>
-          <div class="bike-toggle">
-            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
-            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
-          </div>
-          <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 175.000" data-month="Rp 3.500.000">
-              <span class="price-usd" data-day="~$11" data-month="~$220">~$11</span>
-              <span class="price-slash">/</span>
-              <span class="price-idr" data-day="175.000 IDR" data-month="3.500.000 IDR">175.000 IDR</span>
-            </div>
-            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
-          </div>
-          <div class="bike-cc">⚡ 150cc</div>
-          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Honda%20CRF%20150L" class="bike-book" target="_blank">
-            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Kawasaki W175 -->
-      <div class="bike-card reveal" data-type="medium" data-price-day="175000" data-price-month="3500000">
-        <div class="bike-img">
-          <img src="img/bike-w175.jpg" alt="Kawasaki W175" loading="lazy">
-        </div>
-        <div class="bike-info">
-          <h3 class="bike-name">Kawasaki W175</h3>
-          <div class="bike-toggle">
-            <button class="bike-toggle-btn active" onclick="togglePrice(this,'day')">Daily</button>
-            <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
-          </div>
-          <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 175.000" data-month="Rp 3.500.000">
-              <span class="price-usd" data-day="~$11" data-month="~$220">~$11</span>
-              <span class="price-slash">/</span>
-              <span class="price-idr" data-day="175.000 IDR" data-month="3.500.000 IDR">175.000 IDR</span>
-            </div>
-            <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
-          </div>
-          <div class="bike-cc">⚡ 175cc</div>
-          <a href="https://wa.me/6281234567890?text=Halo%2C%20saya%20mau%20sewa%20Kawasaki%20W175" class="bike-book" target="_blank">
-            <span class="id">Pesan Sekarang</span><span class="en">Book Now</span>
-          </a>
-        </div>
-      </div>
     </div>
   </div>
 </section>
