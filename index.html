@@ -544,22 +544,22 @@ body {
 .fleet-tab {
   padding: 0.5rem 1.4rem;
   border-radius: 4px;
-  border: 1.5px solid var(--ink);
+  border: 1px solid #e0e0e0;
   background: white;
   font-family: var(--font-body);
   font-size: var(--text-sm);
   font-weight: 600;
-  color: var(--ink);
+  color: #555;
   cursor: pointer;
   transition: all 0.2s ease;
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
-.fleet-tab:hover { background: #f5f5f5; }
+.fleet-tab:hover { background: #f5f5f5; border-color: #ccc; }
 .fleet-tab.active {
-  background: var(--ink);
+  background: #222;
   color: white;
-  border-color: var(--ink);
+  border-color: #222;
 }
 
 .fleet-grid {
@@ -571,7 +571,7 @@ body {
 .bike-card {
   background: white;
   border: 1px solid #e0e0e0;
-  border-radius: 6px;
+  border-radius: 4px;
   overflow: hidden;
   transition: all 0.25s var(--ease-out);
   position: relative;
@@ -656,23 +656,29 @@ body {
   margin-bottom: 0.75rem;
 }
 .bike-price-main {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: var(--text-xl);
   font-weight: 700;
-  color: var(--ink);
-  margin-bottom: 0.15rem;
+  color: #111;
 }
-.bike-price-usd {
-  font-family: var(--font-body);
-  font-size: var(--text-xs);
-  color: var(--gold);
+.bike-price-main .price-usd {
+  color: #555;
   font-weight: 600;
-  margin-bottom: 0.15rem;
+  font-size: var(--text-sm);
+}
+.bike-price-main .price-idr {
+  color: #111;
+  font-weight: 700;
+}
+.bike-price-main .price-slash {
+  color: #999;
+  margin: 0 0.3rem;
 }
 .bike-price-period {
   font-family: var(--font-body);
   font-size: var(--text-xs);
-  color: var(--stone);
+  color: #999;
+  margin-top: 0.15rem;
 }
 
 .bike-cc {
@@ -1668,21 +1674,20 @@ body {
     </div>
 
     <div class="fleet-tabs reveal">
-      <button class="fleet-tab active" onclick="filterFleet('all',this)">
+      <button class="fleet-tab" onclick="filterFleet('all',this)">
         <span class="id">Semua</span><span class="en">All</span>
       </button>
-      <button class="fleet-tab" onclick="filterFleet('matic',this)">Matic</button>
-      <button class="fleet-tab" onclick="filterFleet('big',this)">Big Bike</button>
-      <button class="fleet-tab" onclick="filterFleet('sport',this)">Sport</button>
-      <button class="fleet-tab" onclick="filterFleet('retro',this)">Retro</button>
+      <button class="fleet-tab" onclick="filterFleet('small',this)">Small</button>
+      <button class="fleet-tab" onclick="filterFleet('medium',this)">Medium</button>
+      <button class="fleet-tab active" onclick="filterFleet('large',this)">Large</button>
+      <button class="fleet-tab" onclick="filterFleet('xlarge',this)">Extra Large</button>
     </div>
 
     <div class="fleet-grid" id="fleetGrid">
       <!-- Honda Vario 125 -->
-      <div class="bike-card reveal" data-type="matic" data-price-day="75000" data-price-month="1500000">
+      <div class="bike-card reveal" data-type="small" data-price-day="75000" data-price-month="1500000">
         <div class="bike-img">
           <img src="img/bike-vario.jpg" alt="Honda Vario 125" loading="lazy">
-          <span class="bike-badge">Populer</span>
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Honda Vario 125</h3>
@@ -1691,8 +1696,11 @@ body {
             <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
           <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 75.000" data-month="Rp 1.500.000">Rp 75.000</div>
-            <div class="bike-price-usd" data-day="~$5 USD" data-month="~$95 USD">~$5 USD</div>
+            <div class="bike-price-main" data-day="Rp 75.000" data-month="Rp 1.500.000">
+              <span class="price-usd" data-day="~$5" data-month="~$95">~$5</span>
+              <span class="price-slash">/</span>
+              <span class="price-idr" data-day="75.000 IDR" data-month="1.500.000 IDR">75.000 IDR</span>
+            </div>
             <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
           <div class="bike-cc">⚡ 125cc</div>
@@ -1703,7 +1711,7 @@ body {
       </div>
 
       <!-- Honda Scoopy -->
-      <div class="bike-card reveal" data-type="retro" data-price-day="80000" data-price-month="1600000">
+      <div class="bike-card reveal" data-type="small" data-price-day="80000" data-price-month="1600000">
         <div class="bike-img">
           <img src="img/bike-scoopy.jpg" alt="Honda Scoopy" loading="lazy">
         </div>
@@ -1714,8 +1722,11 @@ body {
             <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
           <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 80.000" data-month="Rp 1.600.000">Rp 80.000</div>
-            <div class="bike-price-usd" data-day="~$5 USD" data-month="~$100 USD">~$5 USD</div>
+            <div class="bike-price-main" data-day="Rp 80.000" data-month="Rp 1.600.000">
+              <span class="price-usd" data-day="~$5" data-month="~$100">~$5</span>
+              <span class="price-slash">/</span>
+              <span class="price-idr" data-day="80.000 IDR" data-month="1.600.000 IDR">80.000 IDR</span>
+            </div>
             <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
           <div class="bike-cc">⚡ 110cc</div>
@@ -1726,10 +1737,9 @@ body {
       </div>
 
       <!-- Yamaha NMAX -->
-      <div class="bike-card reveal" data-type="matic" data-price-day="120000" data-price-month="2400000">
+      <div class="bike-card reveal" data-type="medium" data-price-day="120000" data-price-month="2400000">
         <div class="bike-img">
           <img src="img/bike-nmax.jpg" alt="Yamaha NMAX" loading="lazy">
-          <span class="bike-badge" style="background:var(--terracotta);">Premium</span>
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Yamaha NMAX 155</h3>
@@ -1738,8 +1748,11 @@ body {
             <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
           <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 120.000" data-month="Rp 2.400.000">Rp 120.000</div>
-            <div class="bike-price-usd" data-day="~$8 USD" data-month="~$150 USD">~$8 USD</div>
+            <div class="bike-price-main" data-day="Rp 120.000" data-month="Rp 2.400.000">
+              <span class="price-usd" data-day="~$8" data-month="~$150">~$8</span>
+              <span class="price-slash">/</span>
+              <span class="price-idr" data-day="120.000 IDR" data-month="2.400.000 IDR">120.000 IDR</span>
+            </div>
             <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
           <div class="bike-cc">⚡ 155cc</div>
@@ -1750,10 +1763,9 @@ body {
       </div>
 
       <!-- Honda PCX -->
-      <div class="bike-card reveal" data-type="matic" data-price-day="150000" data-price-month="3000000">
+      <div class="bike-card reveal" data-type="medium" data-price-day="150000" data-price-month="3000000">
         <div class="bike-img">
           <img src="img/bike-pcx.jpg" alt="Honda PCX 160" loading="lazy">
-          <span class="bike-badge" style="background:var(--gold);color:var(--ink);">Best Seller</span>
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Honda PCX 160</h3>
@@ -1762,8 +1774,11 @@ body {
             <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
           <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 150.000" data-month="Rp 3.000.000">Rp 150.000</div>
-            <div class="bike-price-usd" data-day="~$10 USD" data-month="~$190 USD">~$10 USD</div>
+            <div class="bike-price-main" data-day="Rp 150.000" data-month="Rp 3.000.000">
+              <span class="price-usd" data-day="~$10" data-month="~$190">~$10</span>
+              <span class="price-slash">/</span>
+              <span class="price-idr" data-day="150.000 IDR" data-month="3.000.000 IDR">150.000 IDR</span>
+            </div>
             <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
           <div class="bike-cc">⚡ 160cc</div>
@@ -1774,7 +1789,7 @@ body {
       </div>
 
       <!-- Honda CB150R -->
-      <div class="bike-card reveal" data-type="sport" data-price-day="150000" data-price-month="3000000">
+      <div class="bike-card reveal" data-type="medium" data-price-day="150000" data-price-month="3000000">
         <div class="bike-img">
           <img src="img/bike-cb150r.jpg" alt="Honda CB150R" loading="lazy">
         </div>
@@ -1785,8 +1800,11 @@ body {
             <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
           <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 150.000" data-month="Rp 3.000.000">Rp 150.000</div>
-            <div class="bike-price-usd" data-day="~$10 USD" data-month="~$190 USD">~$10 USD</div>
+            <div class="bike-price-main" data-day="Rp 150.000" data-month="Rp 3.000.000">
+              <span class="price-usd" data-day="~$10" data-month="~$190">~$10</span>
+              <span class="price-slash">/</span>
+              <span class="price-idr" data-day="150.000 IDR" data-month="3.000.000 IDR">150.000 IDR</span>
+            </div>
             <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
           <div class="bike-cc">⚡ 150cc</div>
@@ -1797,10 +1815,9 @@ body {
       </div>
 
       <!-- Yamaha XMAX -->
-      <div class="bike-card reveal" data-type="big" data-price-day="250000" data-price-month="5000000">
+      <div class="bike-card reveal" data-type="xlarge" data-price-day="250000" data-price-month="5000000">
         <div class="bike-img">
           <img src="img/bike-xmax.jpg" alt="Yamaha XMAX 250" loading="lazy">
-          <span class="bike-badge" style="background:var(--terracotta);">Big Bike</span>
         </div>
         <div class="bike-info">
           <h3 class="bike-name">Yamaha XMAX 250</h3>
@@ -1809,8 +1826,11 @@ body {
             <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
           <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 250.000" data-month="Rp 5.000.000">Rp 250.000</div>
-            <div class="bike-price-usd" data-day="~$16 USD" data-month="~$315 USD">~$16 USD</div>
+            <div class="bike-price-main" data-day="Rp 250.000" data-month="Rp 5.000.000">
+              <span class="price-usd" data-day="~$16" data-month="~$315">~$16</span>
+              <span class="price-slash">/</span>
+              <span class="price-idr" data-day="250.000 IDR" data-month="5.000.000 IDR">250.000 IDR</span>
+            </div>
             <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
           <div class="bike-cc">⚡ 250cc</div>
@@ -1821,7 +1841,7 @@ body {
       </div>
 
       <!-- Honda CRF -->
-      <div class="bike-card reveal" data-type="sport" data-price-day="175000" data-price-month="3500000">
+      <div class="bike-card reveal" data-type="medium" data-price-day="175000" data-price-month="3500000">
         <div class="bike-img">
           <img src="img/bike-crf.jpg" alt="Honda CRF 150L" loading="lazy">
         </div>
@@ -1832,8 +1852,11 @@ body {
             <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
           <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 175.000" data-month="Rp 3.500.000">Rp 175.000</div>
-            <div class="bike-price-usd" data-day="~$11 USD" data-month="~$220 USD">~$11 USD</div>
+            <div class="bike-price-main" data-day="Rp 175.000" data-month="Rp 3.500.000">
+              <span class="price-usd" data-day="~$11" data-month="~$220">~$11</span>
+              <span class="price-slash">/</span>
+              <span class="price-idr" data-day="175.000 IDR" data-month="3.500.000 IDR">175.000 IDR</span>
+            </div>
             <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
           <div class="bike-cc">⚡ 150cc</div>
@@ -1844,7 +1867,7 @@ body {
       </div>
 
       <!-- Kawasaki W175 -->
-      <div class="bike-card reveal" data-type="retro" data-price-day="175000" data-price-month="3500000">
+      <div class="bike-card reveal" data-type="medium" data-price-day="175000" data-price-month="3500000">
         <div class="bike-img">
           <img src="img/bike-w175.jpg" alt="Kawasaki W175" loading="lazy">
         </div>
@@ -1855,8 +1878,11 @@ body {
             <button class="bike-toggle-btn" onclick="togglePrice(this,'month')">Monthly</button>
           </div>
           <div class="bike-pricing">
-            <div class="bike-price-main" data-day="Rp 175.000" data-month="Rp 3.500.000">Rp 175.000</div>
-            <div class="bike-price-usd" data-day="~$11 USD" data-month="~$220 USD">~$11 USD</div>
+            <div class="bike-price-main" data-day="Rp 175.000" data-month="Rp 3.500.000">
+              <span class="price-usd" data-day="~$11" data-month="~$220">~$11</span>
+              <span class="price-slash">/</span>
+              <span class="price-idr" data-day="175.000 IDR" data-month="3.500.000 IDR">175.000 IDR</span>
+            </div>
             <div class="bike-price-period"><span class="id">/hari</span><span class="en">/day</span></div>
           </div>
           <div class="bike-cc">⚡ 175cc</div>
@@ -2464,7 +2490,8 @@ function togglePrice(btn, period) {
   const card = btn.closest('.bike-card');
   const pricing = card.querySelector('.bike-pricing');
   const mainPrice = pricing.querySelector('.bike-price-main');
-  const usdPrice = pricing.querySelector('.bike-price-usd');
+  const priceUsd = mainPrice.querySelector('.price-usd');
+  const priceIdr = mainPrice.querySelector('.price-idr');
   const periodLabel = pricing.querySelector('.bike-price-period');
 
   // Update toggle buttons
@@ -2472,8 +2499,8 @@ function togglePrice(btn, period) {
   btn.classList.add('active');
 
   // Switch prices
-  mainPrice.textContent = mainPrice.dataset[period];
-  usdPrice.textContent = usdPrice.dataset[period];
+  priceUsd.textContent = priceUsd.dataset[period];
+  priceIdr.textContent = priceIdr.dataset[period];
 
   // Update period label
   if (period === 'day') {
