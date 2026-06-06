@@ -1296,36 +1296,6 @@ body {
 }
 
 /* ============================
-   MOBILE STICKY CTA BAR
-   ============================ */
-.mobile-cta-bar {
-  display: none;
-  position: fixed; bottom: 0; left: 0; right: 0;
-  z-index: 88;
-  background: rgba(245,239,230,0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  padding: 0.6rem 1rem;
-  padding-bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
-  box-shadow: 0 -2px 16px rgba(28,25,23,0.1);
-  display: none;
-  gap: 0.5rem;
-}
-.mobile-cta-bar .btn {
-  flex: 1;
-  text-align: center;
-  justify-content: center;
-  font-size: 0.75rem;
-  padding: 0.6rem 0.5rem;
-}
-
-@media (max-width: 600px) {
-  .mobile-cta-bar { display: flex; }
-  .wa-float { display: none; }
-  body { padding-bottom: 70px; }
-}
-
-/* ============================
    SCROLL REVEAL
    ============================ */
 .reveal {
@@ -2502,14 +2472,6 @@ body {
 <div class="wa-tooltip" id="waTooltip">
   <span class="id">💬 Chat Kami!</span>
   <span class="en">💬 Chat Us!</span>
-</div>
-
-<!-- ======================== MOBILE STICKY CTA BAR ======================== -->
-<div class="mobile-cta-bar" id="mobileCtaBar">
-  <a href="https://wa.me/6281234567890?text=Halo%20Bayu%20Bali%20Motor%2C%20saya%20mau%20sewa%20motor" class="btn btn-primary" target="_blank">
-    <span class="id">📱 Chat WhatsApp</span>
-    <span class="en">📱 WhatsApp Us</span>
-  </a>
 </div>
 
 <!-- ======================== JAVASCRIPT ======================== -->
