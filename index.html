@@ -573,6 +573,7 @@ body {
 }
 
 .bike-card {
+  position: relative;
   background: white;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
@@ -580,6 +581,37 @@ body {
   transition: all 0.25s var(--ease-out);
   position: relative;
 }
+/* Sold Out Badge */
+.bike-card.sold-out .bike-img::after {
+  content: 'SOLD OUT';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-15deg);
+  background: rgba(194, 112, 62, 0.92);
+  color: white;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 2rem;
+  border-radius: 4px;
+  z-index: 2;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  pointer-events: none;
+}
+.bike-card.sold-out .bike-img img {
+  filter: grayscale(0.6) brightness(0.7);
+}
+.bike-card.sold-out .bike-book {
+  background: #ccc !important;
+  color: #999 !important;
+  pointer-events: none;
+}
+.bike-card.sold-out .bike-book::after {
+  content: ' (Sold Out)';
+}
+
 .bike-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
@@ -1660,7 +1692,7 @@ body {
     <div class="fleet-grid" id="fleetGrid">
       <!-- ====== SMALL ====== -->
       <!-- Honda Scoopy -->
-      <div class="bike-card reveal" data-type="small" data-price-day="80000" data-price-month="1600000">
+      <div class="bike-card reveal" data-id="scoopy" data-type="small" data-price-day="80000" data-price-month="1600000">
         <div class="bike-img">
           <img src="img/SCOOPY.png" alt="Honda Scoopy" loading="lazy">
         </div>
@@ -1686,7 +1718,7 @@ body {
       </div>
 
       <!-- Yamaha Fazzio -->
-      <div class="bike-card reveal" data-type="small" data-price-day="100000" data-price-month="2000000">
+      <div class="bike-card reveal" data-id="fazzio" data-type="small" data-price-day="100000" data-price-month="2000000">
         <div class="bike-img">
           <img src="img/FAZZIO.png" alt="Yamaha Fazzio" loading="lazy">
         </div>
@@ -1713,7 +1745,7 @@ body {
 
       <!-- ====== MEDIUM ====== -->
       <!-- Vespa Sprint S -->
-      <div class="bike-card reveal" data-type="medium" data-price-day="250000" data-price-month="5000000">
+      <div class="bike-card reveal" data-id="vespa-sprint" data-type="medium" data-price-day="250000" data-price-month="5000000">
         <div class="bike-img">
           <img src="img/VESPA SPRINT.png" alt="Vespa Sprint S" loading="lazy">
         </div>
@@ -1739,7 +1771,7 @@ body {
       </div>
 
       <!-- Yamaha Filano -->
-      <div class="bike-card reveal" data-type="medium" data-price-day="120000" data-price-month="2400000">
+      <div class="bike-card reveal" data-id="filano" data-type="medium" data-price-day="120000" data-price-month="2400000">
         <div class="bike-img">
           <img src="img/FILANO.png" alt="Yamaha Filano" loading="lazy">
         </div>
@@ -1764,7 +1796,7 @@ body {
         </div>
       </div>
       <!-- Yamaha NMAX 155 -->
-      <div class="bike-card reveal" data-type="large" data-price-day="200000" data-price-month="4000000">
+      <div class="bike-card reveal" data-id="old-nmax" data-type="large" data-price-day="200000" data-price-month="4000000">
         <div class="bike-img">
           <img src="img/bike-old-nmax.webp" alt="Yamaha NMAX 155" loading="lazy">
         </div>
@@ -1789,8 +1821,8 @@ body {
         </div>
       </div>
 
-      <!-- Honda PCX 160 -->
-      <div class="bike-card reveal" data-type="large" data-price-day="250000" data-price-month="5000000">
+<!-- Honda PCX -->
+      <div class="bike-card reveal" data-id="new-pcx" data-type="large"
         <div class="bike-img">
           <img src="img/bike-old-pcx.webp" alt="Honda PCX 160" loading="lazy">
         </div>
@@ -1817,7 +1849,7 @@ body {
 
       <!-- ====== LARGE ====== -->
       <!-- Honda ADV 160 -->
-      <div class="bike-card reveal" data-type="large" data-price-day="300000" data-price-month="6000000">
+      <div class="bike-card reveal" data-id="new-adv" data-type="large" data-price-day="300000" data-price-month="6000000">
         <div class="bike-img">
           <img src="img/ADV.png" alt="Honda ADV 160" loading="lazy">
         </div>
@@ -1843,7 +1875,7 @@ body {
       </div>
 
       <!-- Yamaha Aerox 155 -->
-      <div class="bike-card reveal" data-type="large" data-price-day="300000" data-price-month="6000000">
+      <div class="bike-card reveal" data-id="new-nmax" data-type="large" data-price-day="300000" data-price-month="6000000">
         <div class="bike-img">
           <img src="img/bike-new-nmax.webp" alt="Yamaha Aerox 155" loading="lazy">
         </div>
@@ -1896,7 +1928,7 @@ body {
 
       <!-- ====== EXTRA LARGE ====== -->
       <!-- Yamaha XMAX 250 -->
-      <div class="bike-card reveal" data-type="xlarge" data-price-day="250000" data-price-month="5000000">
+      <div class="bike-card reveal" data-id="old-xmax" data-type="xlarge" data-price-day="250000" data-price-month="5000000">
         <div class="bike-img">
           <img src="img/OLD XMAX.png" alt="Yamaha XMAX 250" loading="lazy">
         </div>
@@ -1922,7 +1954,7 @@ body {
       </div>
 
       <!-- Yamaha XMAX 250 (New) -->
-      <div class="bike-card reveal" data-type="xlarge" data-price-day="300000" data-price-month="6000000">
+      <div class="bike-card reveal" data-id="new-xmax" data-type="xlarge" data-price-day="300000" data-price-month="6000000">
         <div class="bike-img">
           <img src="img/NEW XMAX.png" alt="Yamaha New XMAX 250" loading="lazy">
         </div>
@@ -2625,6 +2657,26 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     }
   });
 });
+
+// ====== Stock Status (from stock.json) ======
+(async function loadStock() {
+  try {
+    const res = await fetch('/stock.json?t=' + Date.now());
+    if (!res.ok) return;
+    const data = await res.json();
+    
+    document.querySelectorAll('.bike-card[data-id]').forEach(card => {
+      const id = card.dataset.id;
+      const bike = data.bikes[id];
+      if (bike && bike.status === 'sold') {
+        card.classList.add('sold-out');
+      }
+    });
+  } catch (e) {
+    // Stock file not found or error — just show all as normal
+    console.log('Stock data not loaded:', e);
+  }
+})();
 </script>
 
 </body>

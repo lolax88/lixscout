@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lixscout — Admin Panel</title>
+<style>
+  :root {
+    --bg: #FAF7F2;
+    --card: #FFFFFF;
+    --ink: #1C1917;
+    --ink-light: #57534E;
+    --gold: #C8A96E;
+    --sage: #7C9A82;
+    --sage-light: #E8F0EA;
+    --terracotta: #C2703E;
+    --terracotta-light: #FDF0E8;
+    --danger: #DC2626;
+    --danger-light: #FEE2E2;
+    --border: #E7E5E4;
+    --radius: 12px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+  .header {
+    background: var(--ink);
+    color: white;
+    padding: 1.5rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .header h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+  .header h1 span { color: var(--gold); }
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .status-badge {
+    font-size: 0.75rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+  .status-badge.saved {
+    background: var(--sage-light);
+    color: var(--sage);
+  }
+  .status-badge.saving {
+    background: #FEF3C7;
+    color: #D97706;
+  }
+  .status-badge.error {
+    background: var(--danger-light);
+    color: var(--danger);
+  }
+  .btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: white;
+  }
+  .btn-primary:hover { background: #b8995e; }
+  .btn-primary:disabled {
+    background: #D6C9A8;
+    cursor: not-allowed;
+  }
+  .btn-outline {
+    background: transparent;
+    border: 1.5px solid var(--border);
+    color: var(--ink-light);
+  }
+  .btn-outline:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1.5rem;
+  }
+
+  /* Login */
+  .login-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 2.5rem;
+    text-align: center;
+    max-width: 400px;
+    margin: 4rem auto;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+  .login-box h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+  .login-box p {
+    color: var(--ink-light);
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+  .login-box input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .login-box input:focus {
+    border-color: var(--gold);
+  }
+  .login-error {
+    color: var(--danger);
+    font-size: 0.8rem;
+    margin-bottom: 0.75rem;
+    display: none;
+  }
+
+  /* Settings */
+  .settings-box {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .settings-box h3 {
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    margin-bottom: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .settings-box input {
+    width: 100%;
+    padding: 0.6rem 0.75rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-family: monospace;
+    outline: none;
+  }
+  .settings-box input:focus { border-color: var(--gold); }
+  .settings-hint {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    margin-top: 0.5rem;
+  }
+  .settings-hint a { color: var(--gold); }
+
+  /* Stats */
+  .stats-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+  .stat-card {
+    flex: 1;
+    min-width: 120px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+  .stat-num {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .stat-num.ready { color: var(--sage); }
+  .stat-num.sold { color: var(--terracotta); }
+  .stat-label {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  /* Bike List */
+  .bike-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .bike-row {
+    background: var(--card);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    transition: all 0.2s;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+  }
+  .bike-row.sold {
+    border-color: var(--terracotta);
+    background: var(--terracotta-light);
+  }
+  .bike-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+  }
+  .bike-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: var(--sage-light);
+    flex-shrink: 0;
+  }
+  .bike-row.sold .bike-icon {
+    background: var(--danger-light);
+  }
+  .bike-details h4 {
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+  .bike-details .bike-id {
+    font-size: 0.75rem;
+    color: var(--ink-light);
+    font-family: monospace;
+  }
+  .bike-right {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .stock-input {
+    width: 60px;
+    padding: 0.4rem 0.5rem;
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    outline: none;
+  }
+  .stock-input:focus { border-color: var(--gold); }
+
+  /* Toggle Switch */
+  .toggle {
+    position: relative;
+    width: 52px;
+    height: 28px;
+    flex-shrink: 0;
+  }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+  .toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: var(--sage);
+    border-radius: 999px;
+    transition: 0.3s;
+  }
+  .toggle-slider::before {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 3px;
+    bottom: 3px;
+    background: white;
+    border-radius: 50%;
+    transition: 0.3s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  }
+  .toggle input:checked + .toggle-slider {
+    background: var(--terracotta);
+  }
+  .toggle input:checked + .toggle-slider::before {
+    transform: translateX(24px);
+  }
+  .status-text {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    min-width: 50px;
+    text-align: center;
+  }
+  .status-text.ready { color: var(--sage); }
+  .status-text.sold { color: var(--terracotta); }
+
+  /* Hidden */
+  .hidden { display: none !important; }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .header { padding: 1rem; }
+    .bike-left { gap: 0.75rem; }
+    .bike-icon { width: 40px; height: 40px; font-size: 1.2rem; }
+    .stock-input { width: 50px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="loginPage">
+  <div class="login-box">
+    <h2>🔐 Admin Login</h2>
+    <p>Masukkan password untuk kelola stock motor</p>
+    <div class="login-error" id="loginError">Password salah!</div>
+    <input type="password" id="loginPass" placeholder="Password..." onkeydown="if(event.key==='Enter')doLogin()">
+    <button class="btn btn-primary" style="width:100%" onclick="doLogin()">Masuk</button>
+    <p style="margin-top:1rem;font-size:0.75rem;color:#999">
+      Default: <code>lixscout2026</code>
+    </p>
+  </div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div id="adminPage" class="hidden">
+  <div class="header">
+    <h1>🏍️ <span>Lixscout</span> Stock Manager</h1>
+    <div class="header-right">
+      <span class="status-badge saved" id="statusBadge">✅ Tersimpan</span>
+      <button class="btn btn-primary" id="saveBtn" onclick="saveStock()">💾 Simpan ke Web</button>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- GitHub Token -->
+    <div class="settings-box" id="tokenBox">
+      <h3>🔑 GitHub Token (satu kali aja)</h3>
+      <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" oninput="saveToken()">
+      <p class="settings-hint">
+        Bikin di <a href="https://github.com/settings/tokens/new?scopes=repo&note=lixscout-stock" target="_blank">GitHub Settings → Tokens</a>.
+        Centang <strong>repo</strong> scope. Token disimpan di browser aja.
+      </p>
+    </div>
+
+    <!-- Stats -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-num" id="totalNum">11</div>
+        <div class="stat-label">Total Motor</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num ready" id="readyNum">11</div>
+        <div class="stat-label">Ready</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num sold" id="soldNum">0</div>
+        <div class="stat-label">Sold Out</div>
+      </div>
+    </div>
+
+    <!-- Bike List -->
+    <div class="bike-list" id="bikeList"></div>
+  </div>
+</div>
+
+<script>
+const REPO = 'lolax88/lixscout';
+const FILE_PATH = 'stock.json';
+const BRANCH = 'master';
+const ADMIN_PASS = 'lixscout2026';
+
+let stockData = null;
+let originalContent = '';
+
+// ====== LOGIN ======
+function doLogin() {
+  const pass = document.getElementById('loginPass').value;
+  if (pass === ADMIN_PASS) {
+    document.getElementById('loginPage').classList.add('hidden');
+    document.getElementById('adminPage').classList.remove('hidden');
+    localStorage.setItem('lixscout_admin', '1');
+    init();
+  } else {
+    document.getElementById('loginError').style.display = 'block';
+  }
+}
+
+// Auto-login
+if (localStorage.getItem('lixscout_admin') === '1') {
+  document.getElementById('loginPage').classList.add('hidden');
+  document.getElementById('adminPage').classList.remove('hidden');
+  setTimeout(init, 100);
+}
+
+// ====== INIT ======
+async function init() {
+  // Load token
+  const savedToken = localStorage.getItem('lixscout_gh_token');
+  if (savedToken) {
+    document.getElementById('ghToken').value = savedToken;
+    document.getElementById('tokenBox').style.display = 'none';
+  }
+
+  // Load stock
+  await loadStock();
+}
+
+function saveToken() {
+  const token = document.getElementById('ghToken').value.trim();
+  if (token) {
+    localStorage.setItem('lixscout_gh_token', token);
+  }
+}
+
+// ====== LOAD STOCK ======
+async function loadStock() {
+  try {
+    const res = await fetch(`https://raw.githubusercontent.com/${REPO}/${BRANCH}/${FILE_PATH}?t=${Date.now()}`);
+    if (!res.ok) throw new Error('Failed to load');
+    stockData = await res.json();
+    originalContent = JSON.stringify(stockData, null, 2);
+    renderBikes();
+  } catch (e) {
+    console.error('Load error:', e);
+    // Fallback: buat default
+    stockData = {
+      last_updated: new Date().toISOString(),
+      bikes: {}
+    };
+    renderBikes();
+  }
+}
+
+// ====== RENDER ======
+function renderBikes() {
+  const list = document.getElementById('bikeList');
+  const bikes = stockData.bikes;
+  const bikeKeys = Object.keys(bikes);
+
+  list.innerHTML = bikeKeys.map(key => {
+    const bike = bikes[key];
+    const isSold = bike.status === 'sold';
+    return `
+      <div class="bike-row ${isSold ? 'sold' : ''}" id="row-${key}">
+        <div class="bike-left">
+          <div class="bike-icon">${isSold ? '🚫' : '🏍️'}</div>
+          <div class="bike-details">
+            <h4>${bike.name}</h4>
+            <div class="bike-id">${key}</div>
+          </div>
+        </div>
+        <div class="bike-right">
+          <input type="number" class="stock-input" value="${bike.stock}" min="0" max="99"
+            onchange="updateStock('${key}', this.value)">
+          <span class="status-text ${isSold ? 'sold' : 'ready'}" id="status-${key}">
+            ${isSold ? 'SOLD' : 'READY'}
+          </span>
+          <label class="toggle">
+            <input type="checkbox" ${isSold ? 'checked' : ''}
+              onchange="toggleStatus('${key}', this.checked)">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  updateStats();
+}
+
+function updateStats() {
+  const bikes = Object.values(stockData.bikes);
+  const ready = bikes.filter(b => b.status === 'ready').length;
+  const sold = bikes.filter(b => b.status === 'sold').length;
+  document.getElementById('totalNum').textContent = bikes.length;
+  document.getElementById('readyNum').textContent = ready;
+  document.getElementById('soldNum').textContent = sold;
+}
+
+function toggleStatus(key, isSold) {
+  stockData.bikes[key].status = isSold ? 'sold' : 'ready';
+  if (isSold) stockData.bikes[key].stock = 0;
+
+  const row = document.getElementById(`row-${key}`);
+  const status = document.getElementById(`status-${key}`);
+  const icon = row.querySelector('.bike-icon');
+
+  row.classList.toggle('sold', isSold);
+  status.textContent = isSold ? 'SOLD' : 'READY';
+  status.className = `status-text ${isSold ? 'sold' : 'ready'}`;
+  icon.textContent = isSold ? '🚫' : '🏍️';
+
+  // Update stock input
+  if (isSold) {
+    row.querySelector('.stock-input').value = 0;
+  }
+
+  updateStats();
+  markUnsaved();
+}
+
+function updateStock(key, value) {
+  stockData.bikes[key].stock = parseInt(value) || 0;
+  if (stockData.bikes[key].stock > 0 && stockData.bikes[key].status === 'sold') {
+    stockData.bikes[key].status = 'ready';
+    renderBikes();
+  }
+  markUnsaved();
+}
+
+function markUnsaved() {
+  const badge = document.getElementById('statusBadge');
+  badge.textContent = '⏳ Belum simpan';
+  badge.className = 'status-badge saving';
+}
+
+// ====== SAVE TO GITHUB ======
+async function saveStock() {
+  const token = localStorage.getItem('lixscout_gh_token');
+  if (!token) {
+    alert('Masukkan GitHub Token dulu ya!');
+    document.getElementById('tokenBox').style.display = 'block';
+    document.getElementById('ghToken').focus();
+    return;
+  }
+
+  const badge = document.getElementById('statusBadge');
+  const saveBtn = document.getElementById('saveBtn');
+  
+  badge.textContent = '⏳ Menyimpan...';
+  badge.className = 'status-badge saving';
+  saveBtn.disabled = true;
+
+  try {
+    stockData.last_updated = new Date().toISOString();
+    const newContent = JSON.stringify(stockData, null, 2);
+
+    // Get current file SHA
+    const fileRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+      headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' }
+    });
+    
+    if (!fileRes.ok) {
+      const err = await fileRes.json();
+      throw new Error(err.message || 'Failed to get file');
+    }
+    
+    const fileData = await fileRes.json();
+    const sha = fileData.sha;
+
+    // Update file
+    const updateRes = await fetch(`https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`, {
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${token}`,
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        message: `🏍️ Update stock: ${new Date().toLocaleString('id-ID')}`,
+        content: btoa(unescape(encodeURIComponent(newContent))),
+        sha: sha,
+        branch: BRANCH
+      })
+    });
+
+    if (!updateRes.ok) {
+      const err = await updateRes.json();
+      throw new Error(err.message || 'Failed to update');
+    }
+
+    originalContent = newContent;
+    badge.textContent = '✅ Tersimpan!';
+    badge.className = 'status-badge saved';
+
+    // Auto-hide badge after 3s
+    setTimeout(() => {
+      badge.textContent = '✅ Tersimpan';
+      badge.className = 'status-badge saved';
+    }, 3000);
+
+  } catch (e) {
+    console.error('Save error:', e);
+    badge.textContent = '❌ Gagal!';
+    badge.className = 'status-badge error';
+    alert('Gagal simpan: ' + e.message);
+    
+    setTimeout(() => {
+      badge.textContent = '⏳ Belum simpan';
+      badge.className = 'status-badge saving';
+    }, 3000);
+  }
+
+  saveBtn.disabled = false;
+}
+
+// ====== KEYBOARD SHORTCUT ======
+document.addEventListener('keydown', (e) => {
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    saveStock();
+  }
+});
+</script>
+
+</body>
+</html>
