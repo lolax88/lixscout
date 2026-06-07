@@ -525,7 +525,10 @@ function toggleStatus(key, isSold) {
 
 function updateStock(key, value) {
   stockData.bikes[key].stock = parseInt(value) || 0;
-  if (stockData.bikes[key].stock > 0 && stockData.bikes[key].status === 'sold') {
+  if (stockData.bikes[key].stock === 0 && stockData.bikes[key].status === 'ready') {
+    stockData.bikes[key].status = 'sold';
+    renderBikes();
+  } else if (stockData.bikes[key].stock > 0 && stockData.bikes[key].status === 'sold') {
     stockData.bikes[key].status = 'ready';
     renderBikes();
   }
