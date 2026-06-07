@@ -475,7 +475,7 @@ function renderBikes() {
         </div>
         <div class="bike-right">
           <input type="number" class="stock-input" value="${bike.stock}" min="0" max="99"
-            onchange="updateStock('${key}', this.value)">
+            oninput="updateStock('${key}', this.value)">
           <span class="status-text ${isSold ? 'sold' : 'ready'}" id="status-${key}">
             ${isSold ? 'SOLD' : 'READY'}
           </span>
