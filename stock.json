@@ -1,10 +1,10 @@
 {
-  "last_updated": "2026-06-07T12:54:20.315Z",
+  "last_updated": "2026-06-07T12:55:02.640Z",
   "bikes": {
     "scoopy": {
       "name": "Scoopy",
-      "stock": 1,
-      "status": "ready"
+      "stock": 0,
+      "status": "sold"
     },
     "fazzio": {
       "name": "Fazzio",
