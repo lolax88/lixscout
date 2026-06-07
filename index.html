@@ -585,23 +585,22 @@ body {
 .bike-card.sold-out .bike-img::after {
   content: 'SOLD OUT';
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) rotate(-15deg);
-  background: rgba(194, 112, 62, 0.92);
-  color: white;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Playfair Display', serif;
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  padding: 0.5rem 2rem;
-  border-radius: 4px;
+  font-size: 1.75rem;
+  font-weight: 900;
+  color: #DC2626;
+  letter-spacing: 0.15em;
   z-index: 2;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
   pointer-events: none;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 .bike-card.sold-out .bike-img img {
-  filter: grayscale(0.6) brightness(0.7);
+  filter: grayscale(1) brightness(0.4);
 }
 .bike-card.sold-out .bike-book {
   background: #ccc !important;
