@@ -1,0 +1,59 @@
+# Lixscout
+> Sewa motor Bali terpercaya — Trusted motorcycle rental in Bali, Indonesia
+
+## About
+Lixscout adalah layanan sewa motor terpercaya di Bali. Kami menyediakan berbagai pilihan motor matic untuk kebutuhan transportasi Anda selama di Bali. Armada lengkap, harga transparan, antar jemput gratis.
+
+## Services
+| Motor | Harga per Hari |
+|-------|---------------|
+| Honda Scoopy | Rp 75.000 |
+| Yamaha Fazzio | Rp 75.000 |
+| Vespa Sprint S | Rp 90.000 |
+| Yamaha Filano | Rp 80.000 |
+| Honda ADV 160 | Rp 100.000 |
+| Yamaha NMAX | Rp 100.000 |
+| Honda PCX 160 | Rp 100.000 |
+| Yamaha XMAX 250 | Rp 150.000 |
+
+## Features
+- Antar jemput motor ke lokasi Anda (gratis area Kuta, Seminyak, Denpasar, Bandara Ngurah Rai)
+- Helm SNI 2 buah disediakan
+- Jas hujan tersedia
+- STNK asli
+- BBM penuh saat serah terima
+- Asuransi dasar termasuk
+- Layanan darurat 24 jam
+
+## Contact
+- WhatsApp: +62 812-4611-3369
+- Website: https://lixscout.vercel.app
+- TikTok: @lolaxxx__
+- Instagram: @lolaxx__
+
+## Location
+Bali, Indonesia
+Koordinat: -8.340539, 115.091949
+Area layanan: Seluruh Bali (Denpasar, Kuta, Seminyak, Ubud, Canggu, Sanur, Nusa Dua, Uluwatu, Jimbaran)
+
+## Hours
+Buka setiap hari: 07:00 - 22:00 WITA
+
+## Payment Methods
+- Tunai (IDR)
+- Transfer bank (BCA, Mandiri, BNI)
+- GoPay, OVO, Dana
+- Kartu kredit/debit
+
+## FAQ
+Q: Apakah perlu SIM untuk sewa motor?
+A: Ya, Anda memerlukan SIM C (Indonesia) atau International Driving Permit (IDP) dengan kategori motor.
+
+Q: Apakah asuransi sudah termasuk?
+A: Ya, semua harga sudah termasuk asuransi dasar. Asuransi premium (all-risk) tersedia dengan tambahan Rp 25.000/hari.
+
+Q: Area antar jemput gratis sampai mana?
+A: Gratis untuk area Kuta, Seminyak, Denpasar, dan Bandara Ngurah Rai. Ubud, Canggu, Uluwatu dikenakan Rp 50.000.
+
+Q: Bagaimana jika motor mogok?
+A: Hubungi WhatsApp kami, teknisi datang dalam 30-60 menit. Jika tidak bisa diperbaiki, kami ganti motor lain. Layanan 24 jam.
