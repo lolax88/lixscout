@@ -1,16 +1,60 @@
 {
-  "last_updated": "2026-06-07T19:00:00+08:00",
+  "last_updated": "2026-06-07T12:54:20.315Z",
   "bikes": {
-    "scoopy": { "name": "Scoopy", "stock": 1, "status": "ready" },
-    "fazzio": { "name": "Fazzio", "stock": 1, "status": "ready" },
-    "vespa-sprint": { "name": "Vespa Sprint S", "stock": 1, "status": "ready" },
-    "filano": { "name": "Filano", "stock": 1, "status": "ready" },
-    "old-nmax": { "name": "Old Nmax", "stock": 1, "status": "ready" },
-    "old-pcx": { "name": "Old Pcx", "stock": 1, "status": "ready" },
-    "new-adv": { "name": "New Adv", "stock": 1, "status": "ready" },
-    "new-nmax": { "name": "New Nmax", "stock": 1, "status": "ready" },
-    "new-pcx": { "name": "New Pcx", "stock": 1, "status": "ready" },
-    "old-xmax": { "name": "Old Xmax", "stock": 1, "status": "ready" },
-    "new-xmax": { "name": "New Xmax", "stock": 1, "status": "ready" }
+    "scoopy": {
+      "name": "Scoopy",
+      "stock": 1,
+      "status": "ready"
+    },
+    "fazzio": {
+      "name": "Fazzio",
+      "stock": 1,
+      "status": "ready"
+    },
+    "vespa-sprint": {
+      "name": "Vespa Sprint S",
+      "stock": 1,
+      "status": "ready"
+    },
+    "filano": {
+      "name": "Filano",
+      "stock": 1,
+      "status": "ready"
+    },
+    "old-nmax": {
+      "name": "Old Nmax",
+      "stock": 1,
+      "status": "ready"
+    },
+    "old-pcx": {
+      "name": "Old Pcx",
+      "stock": 1,
+      "status": "ready"
+    },
+    "new-adv": {
+      "name": "New Adv",
+      "stock": 1,
+      "status": "ready"
+    },
+    "new-nmax": {
+      "name": "New Nmax",
+      "stock": 1,
+      "status": "ready"
+    },
+    "new-pcx": {
+      "name": "New Pcx",
+      "stock": 1,
+      "status": "ready"
+    },
+    "old-xmax": {
+      "name": "Old Xmax",
+      "stock": 1,
+      "status": "ready"
+    },
+    "new-xmax": {
+      "name": "New Xmax",
+      "stock": 1,
+      "status": "ready"
+    }
   }
 }
