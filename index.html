@@ -1370,7 +1370,8 @@ body {
   overflow: hidden;
   opacity: 0.85;
   transition: opacity 0.2s, transform 0.2s;
-  background: rgba(255,255,255,0.05);
+  background: #fff;
+  padding: 4px 6px;
 }
 .payment-logo:hover { opacity: 1; transform: scale(1.05); }
 .payment-logo svg { width: 100%; height: 100%; }
@@ -2648,9 +2649,6 @@ body {
   <div class="footer-payment">
     <h4><span class="id">Metode Pembayaran</span><span class="en">Payment Methods</span></h4>
     <div class="payment-logos">
-      <div class="payment-logo" title="BNI">
-        <svg viewBox="0 0 100 36" fill="none"><rect width="100" height="36" rx="4" fill="#ED1C24"/><text x="50" y="24" text-anchor="middle" fill="white" font-family="Arial,sans-serif" font-weight="bold" font-size="18">BNI</text></svg>
-      </div>
       <div class="payment-logo" title="BCA">
         <img src="img/payment/bca.png" alt="BCA" style="width:100%;height:100%;object-fit:contain;">
       </div>
@@ -2663,11 +2661,8 @@ body {
       <div class="payment-logo" title="PermataBank">
         <img src="img/payment/permata.png" alt="PermataBank" style="width:100%;height:100%;object-fit:contain;">
       </div>
-      <div class="payment-logo" title="VISA">
-        <svg viewBox="0 0 100 36" fill="none"><rect width="100" height="36" rx="4" fill="#1A1F71"/><text x="50" y="25" text-anchor="middle" fill="white" font-family="serif" font-weight="bold" font-size="18" font-style="italic">VISA</text></svg>
-      </div>
       <div class="payment-logo" title="Mastercard">
-        <svg viewBox="0 0 100 36" fill="none"><rect width="100" height="36" rx="4" fill="#1A1A2E"/><circle cx="42" cy="18" r="11" fill="#EB001B" opacity="0.9"/><circle cx="58" cy="18" r="11" fill="#F79E1B" opacity="0.9"/></svg>
+        <svg viewBox="0 0 100 36" fill="none"><circle cx="42" cy="18" r="12" fill="#EB001B" opacity="0.9"/><circle cx="58" cy="18" r="12" fill="#F79E1B" opacity="0.9"/></svg>
       </div>
     </div>
   </div>
