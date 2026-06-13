@@ -1924,7 +1924,7 @@ body {
 }
 .review-popup-overlay.active { display: flex; }
 .review-popup {
-  background: var(--paper);
+  background: var(--military);
   border-radius: 16px;
   padding: 2.5rem 2rem;
   max-width: 420px;
@@ -1942,19 +1942,19 @@ body {
   border: none;
   font-size: 1.5rem;
   cursor: pointer;
-  color: var(--ink);
-  opacity: 0.5;
+  color: rgba(255,255,255,0.7);
+  opacity: 0.7;
 }
-.review-popup .close-btn:hover { opacity: 1; }
+.review-popup .close-btn:hover { opacity: 1; color: white; }
 .review-popup h3 {
   font-family: var(--font-display);
   font-size: 1.3rem;
-  color: var(--ink);
+  color: white;
   margin-bottom: 0.3rem;
 }
 .review-popup p {
   font-size: 0.85rem;
-  color: rgba(28,25,23,0.6);
+  color: rgba(255,255,255,0.8);
   margin-bottom: 1rem;
 }
 .review-stars-input {
@@ -1968,7 +1968,7 @@ body {
   border: none;
   font-size: 2rem;
   cursor: pointer;
-  color: rgba(28,25,23,0.2);
+  color: rgba(255,255,255,0.3);
   transition: color 0.15s;
   padding: 0;
 }
@@ -1977,7 +1977,7 @@ body {
 .review-textarea {
   width: 100%;
   padding: 0.8rem 1rem;
-  border: 2px solid rgba(28,25,23,0.15);
+  border: 2px solid rgba(255,255,255,0.2);
   border-radius: 10px;
   font-size: 0.9rem;
   font-family: var(--font-body);
@@ -1986,12 +1986,15 @@ body {
   min-height: 80px;
   transition: border-color 0.2s;
   box-sizing: border-box;
+  background: rgba(255,255,255,0.1);
+  color: white;
 }
+.review-textarea::placeholder { color: rgba(255,255,255,0.5); }
 .review-textarea:focus { border-color: var(--gold); }
 .review-name-input {
   width: 100%;
   padding: 0.6rem 1rem;
-  border: 2px solid rgba(28,25,23,0.15);
+  border: 2px solid rgba(255,255,255,0.2);
   border-radius: 10px;
   font-size: 0.9rem;
   font-family: var(--font-body);
@@ -1999,13 +2002,16 @@ body {
   margin-top: 0.6rem;
   transition: border-color 0.2s;
   box-sizing: border-box;
+  background: rgba(255,255,255,0.1);
+  color: white;
 }
+.review-name-input::placeholder { color: rgba(255,255,255,0.5); }
 .review-name-input:focus { border-color: var(--gold); }
 .review-submit-btn {
   width: 100%;
   padding: 0.9rem;
-  background: var(--military);
-  color: white;
+  background: var(--gold);
+  color: var(--ink);
   border: none;
   border-radius: 10px;
   font-size: 1rem;
