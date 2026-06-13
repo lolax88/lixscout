@@ -1,0 +1,19 @@
+{
+  "name": "Lixscout",
+  "short_name": "Lixscout",
+  "icons": [
+    {
+      "src": "img/favicon-192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "img/favicon-512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "theme_color": "#4A5D23",
+  "background_color": "#4A5D23",
+  "display": "standalone"
+}
