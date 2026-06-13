@@ -2224,14 +2224,8 @@ href="https://t.me/+6282145210518?text=Halo%20Lixscout%2C%20saya%20mau%20sewa%20
       <input type="date" id="rentDate" required>
     </div>
     <div>
-      <label><span class="id">Durasi</span><span class="en">Duration</span></label>
-      <select id="rentDuration">
-        <option value="1">1 <span class="id">Hari</span><span class="en">Day</span></option>
-        <option value="3">3 <span class="id">Hari</span><span class="en">Days</span></option>
-        <option value="7" selected>7 <span class="id">Hari</span><span class="en">Days</span></option>
-        <option value="14">14 <span class="id">Hari</span><span class="en">Days</span></option>
-        <option value="30">1 <span class="id">Bulan</span><span class="en">Month</span></option>
-      </select>
+      <label><span class="id">Tanggal Kembali</span><span class="en">Return Date</span></label>
+      <input type="date" id="returnDate" required>
     </div>
     <div>
       <label><span class="id">Ukuran Motor</span><span class="en">Bike Size</span></label>
@@ -3392,12 +3386,23 @@ document.getElementById('rentDate').value = new Date().toISOString().split('T')[
 function checkAvailability(e) {
   e.preventDefault();
   const date = document.getElementById('rentDate').value;
-  const duration = document.getElementById('rentDuration').value;
+  const returnDate = document.getElementById('returnDate').value;
   const type = document.getElementById('rentType');
   const typeName = type.options[type.selectedIndex].text;
+  
+  // Hitung durasi dari tanggal sewa dan kembali
+  let durationText = '';
+  if (date && returnDate) {
+    const start = new Date(date);
+    const end = new Date(returnDate);
+    const diffTime = Math.abs(end - start);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    durationText = diffDays + ' hari';
+  }
+  
   const msg = currentLang === 'id'
-    ? `Halo, saya mau cek ketersediaan motor ${typeName} untuk tanggal ${date}, durasi ${duration} hari.`
-    : `Hi, I'd like to check availability for ${typeName} on ${date} for ${duration} days.`;
+    ? `Halo, saya mau cek ketersediaan motor ${typeName} untuk tanggal ${date} sampai ${returnDate} (${durationText}).`
+    : `Hi, I'd like to check availability for ${typeName} from ${date} to ${returnDate} (${durationText}).`;
   
   // GA4 event tracking
   if (typeof gtag !== 'undefined') {
@@ -3414,6 +3419,22 @@ function checkAvailability(e) {
   
   showChatModal(msg);
 }
+
+// Set minimum return date when rental date changes
+document.getElementById('rentDate').addEventListener('change', function() {
+  const returnDate = document.getElementById('returnDate');
+  returnDate.min = this.value;
+  if (returnDate.value && returnDate.value < this.value) {
+    returnDate.value = this.value;
+  }
+});
+
+// Set default dates
+(function() {
+  const today = new Date().toISOString().split('T')[0];
+  document.getElementById('rentDate').min = today;
+  document.getElementById('returnDate').min = today;
+})();
 
 // ====== Chat Modal ======
 function showChatModal(msg) {
