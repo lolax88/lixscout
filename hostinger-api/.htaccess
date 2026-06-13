@@ -1,0 +1,25 @@
+# ============================================
+# Lixscout API - .htaccess
+# Taruh di folder /api/ di Hostinger
+# ============================================
+
+RewriteEngine On
+
+# CORS headers
+Header always set Access-Control-Allow-Origin "https://lixscout.com"
+Header always set Access-Control-Allow-Methods "GET, POST, OPTIONS"
+Header always set Access-Control-Allow-Headers "Content-Type"
+Header always set Access-Control-Max-Age "86400"
+
+# Handle preflight OPTIONS
+RewriteCond %{REQUEST_METHOD} OPTIONS
+RewriteRule ^(.*)$ $1 [R=200,L]
+
+# Block akses ke file sensitif
+<FilesMatch "\.(sql|md|json)$">
+    Order deny,allow
+    Deny from all
+</FilesMatch>
+
+# Disable directory listing
+Options -Indexes

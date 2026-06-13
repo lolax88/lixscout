@@ -3551,6 +3551,9 @@ function closeDiscountPopup() {
   document.getElementById('discountPopup').classList.remove('active');
 }
 
+// API Base URL - Hostinger backend
+const API_BASE = '/api';
+
 function claimDiscount() {
   const email = document.getElementById('discountEmail').value.trim();
   const errorEl = document.getElementById('emailError');
@@ -3562,24 +3565,62 @@ function claimDiscount() {
   }
   errorEl.style.display = 'none';
   
-  // Save to localStorage
-  saveDiscountData({ claimed: true, email: email, reviewed: false, claimedAt: new Date().toISOString() });
+  // Disable button, show loading
+  const btn = document.querySelector('.claim-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="id">Loading...</span><span class="en">Loading...</span>';
   
-  // Show success
-  document.getElementById('discountForm').style.display = 'none';
-  document.getElementById('discountSuccess').style.display = 'block';
-  
-  // Apply discount to UI
-  applyDiscountUI();
-  applyPriceDiscount();
-  
-  // Track event
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'discount_claimed', { event_category: 'conversion', event_label: email });
-  }
-  if (typeof fbq !== 'undefined') {
-    fbq('track', 'Lead', { content_name: '5% Discount Claim' });
-  }
+  // Call Hostinger API
+  fetch(API_BASE + '/claim.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: email })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if (data.success) {
+      // Save to localStorage (backup + state tracking)
+      saveDiscountData({ 
+        claimed: true, 
+        email: email, 
+        reviewed: data.has_reviewed || false,
+        claim_id: data.claim_id || null,
+        claimedAt: new Date().toISOString() 
+      });
+      
+      // Show success
+      document.getElementById('discountForm').style.display = 'none';
+      document.getElementById('discountSuccess').style.display = 'block';
+      
+      // Apply discount to UI
+      applyDiscountUI();
+      applyPriceDiscount();
+      
+      // Track event
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'discount_claimed', { event_category: 'conversion', event_label: email });
+      }
+      if (typeof fbq !== 'undefined') {
+        fbq('track', 'Lead', { content_name: '5% Discount Claim' });
+      }
+    } else {
+      errorEl.textContent = data.error || 'Gagal klaim diskon';
+      errorEl.style.display = 'block';
+    }
+  })
+  .catch(err => {
+    // Fallback ke localStorage kalau API gagal
+    console.warn('API error, using localStorage fallback:', err);
+    saveDiscountData({ claimed: true, email: email, reviewed: false, claimedAt: new Date().toISOString() });
+    document.getElementById('discountForm').style.display = 'none';
+    document.getElementById('discountSuccess').style.display = 'block';
+    applyDiscountUI();
+    applyPriceDiscount();
+  })
+  .finally(() => {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="id">🎁 Klaim Sekarang!</span><span class="en">🎁 Claim Now!</span>';
+  });
 }
 
 function applyDiscountUI() {
@@ -3674,40 +3715,93 @@ function submitReview() {
   const text = document.getElementById('reviewText').value.trim();
   const name = document.getElementById('reviewName').value.trim() || 'Traveler';
   const data = getDiscountData();
+  const email = data.email || '';
   
-  // Save review to localStorage
-  const reviews = getReviews();
-  const newReview = {
-    rating: reviewRating,
-    text: text || (document.documentElement.lang === 'en' ? 'Great service!' : 'Pelayanan bagus!'),
-    name: name,
-    email: data.email || '',
-    reviewed: true,
-    date: new Date().toISOString()
-  };
-  reviews.push(newReview);
-  localStorage.setItem(REVIEW_KEY, JSON.stringify(reviews));
+  // Disable button
+  const btn = document.querySelector('.review-submit-btn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="id">Mengirim...</span><span class="en">Sending...</span>';
   
-  // Mark as reviewed in discount data
-  data.reviewed = true;
-  saveDiscountData(data);
+  const reviewText = text || (document.documentElement.lang === 'en' ? 'Great service!' : 'Pelayanan bagus!');
   
-  // Update review button
-  document.getElementById('discountReviewBtn').innerHTML = '<span class="id">✅ Udah Ulasan!</span><span class="en">✅ Reviewed!</span>';
-  document.getElementById('discountReviewBtn').style.opacity = '0.6';
-  document.getElementById('discountReviewBtn').onclick = null;
-  
-  // Show success
-  document.getElementById('reviewForm').style.display = 'none';
-  document.getElementById('reviewSuccess').style.display = 'block';
-  
-  // Add to testimonials section
-  addUserReviewToPage(newReview);
-  
-  // Track event
-  if (typeof gtag !== 'undefined') {
-    gtag('event', 'review_submitted', { event_category: 'engagement', event_label: name, value: reviewRating });
-  }
+  // Call Hostinger API
+  fetch(API_BASE + '/review.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email: email,
+      rating: reviewRating,
+      text: reviewText,
+      name: name
+    })
+  })
+  .then(res => res.json())
+  .then(result => {
+    if (result.success) {
+      const newReview = {
+        rating: reviewRating,
+        text: reviewText,
+        name: name,
+        email: email,
+        reviewed: true,
+        date: new Date().toISOString()
+      };
+      
+      // Save to localStorage (backup)
+      const reviews = getReviews();
+      reviews.push(newReview);
+      localStorage.setItem(REVIEW_KEY, JSON.stringify(reviews));
+      
+      // Mark as reviewed
+      data.reviewed = true;
+      saveDiscountData(data);
+      
+      // Update UI
+      document.getElementById('discountReviewBtn').innerHTML = '<span class="id">✅ Udah Ulasan!</span><span class="en">✅ Reviewed!</span>';
+      document.getElementById('discountReviewBtn').style.opacity = '0.6';
+      document.getElementById('discountReviewBtn').onclick = null;
+      
+      document.getElementById('reviewForm').style.display = 'none';
+      document.getElementById('reviewSuccess').style.display = 'block';
+      
+      addUserReviewToPage(newReview);
+      
+      // Track event
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'review_submitted', { event_category: 'engagement', event_label: name, value: reviewRating });
+      }
+    } else {
+      alert(result.error || 'Gagal mengirim review');
+    }
+  })
+  .catch(err => {
+    // Fallback: simpan ke localStorage aja
+    console.warn('API error, using localStorage fallback:', err);
+    const newReview = {
+      rating: reviewRating,
+      text: reviewText,
+      name: name,
+      email: email,
+      reviewed: true,
+      date: new Date().toISOString()
+    };
+    const reviews = getReviews();
+    reviews.push(newReview);
+    localStorage.setItem(REVIEW_KEY, JSON.stringify(reviews));
+    data.reviewed = true;
+    saveDiscountData(data);
+    
+    document.getElementById('discountReviewBtn').innerHTML = '<span class="id">✅ Udah Ulasan!</span><span class="en">✅ Reviewed!</span>';
+    document.getElementById('discountReviewBtn').style.opacity = '0.6';
+    document.getElementById('discountReviewBtn').onclick = null;
+    document.getElementById('reviewForm').style.display = 'none';
+    document.getElementById('reviewSuccess').style.display = 'block';
+    addUserReviewToPage(newReview);
+  })
+  .finally(() => {
+    btn.disabled = false;
+    btn.innerHTML = '<span class="id">Kirim Ulasan</span><span class="en">Submit Review</span>';
+  });
 }
 
 function getReviews() {
@@ -3717,12 +3811,39 @@ function getReviews() {
 }
 
 function loadUserReviews() {
-  const reviews = getReviews();
-  reviews.forEach(r => addUserReviewToPage(r));
+  // Load dari localStorage (backup)
+  const localReviews = getReviews();
+  localReviews.forEach(r => addUserReviewToPage(r));
+  
+  // Load dari API (data real dari semua user)
+  fetch(API_BASE + '/reviews.php?limit=20')
+    .then(res => res.json())
+    .then(data => {
+      if (data.success && data.reviews.length > 0) {
+        // Update average rating di schema (opsional)
+        console.log('Loaded', data.total, 'reviews, avg:', data.avg_rating);
+        
+        // Tambahin review dari database yang belum ada di localStorage
+        const localTexts = new Set(localReviews.map(r => r.text));
+        data.reviews.forEach(r => {
+          if (!localTexts.has(r.text)) {
+            addUserReviewToPage({
+              rating: r.rating,
+              text: r.text,
+              name: r.name,
+              date: r.date
+            });
+          }
+        });
+      }
+    })
+    .catch(err => {
+      console.warn('Could not load reviews from API:', err);
+    });
   
   // Check if user already reviewed
-  const data = getDiscountData();
-  if (data.claimed && data.reviewed) {
+  const userData = getDiscountData();
+  if (userData.claimed && userData.reviewed) {
     document.getElementById('discountReviewBtn').innerHTML = '<span class="id">✅ Udah Ulasan!</span><span class="en">✅ Reviewed!</span>';
     document.getElementById('discountReviewBtn').style.opacity = '0.6';
     document.getElementById('discountReviewBtn').onclick = null;
