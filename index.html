@@ -1801,6 +1801,12 @@ body {
 
 
 /* ====== DISCOUNT POPUP SYSTEM ====== */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
 .discount-popup-overlay {
   display: none;
   position: fixed;
@@ -2609,7 +2615,7 @@ body {
   <button class="btn btn-primary" id="discountClaimBtn" onclick="openDiscountPopup()">
     <span class="id">Klaim Diskon</span><span class="en">Claim Discount</span>
   </button>
-  <button class="btn btn-primary" id="discountReviewBtn" onclick="openReviewPopup()" style="display:none; background: var(--military); color: white;">
+  <button class="btn btn-primary" id="discountReviewBtn" onclick="openReviewPopup()" style="display:none; background: #C0392B; color: white; font-weight: 700; box-shadow: 0 4px 15px rgba(192,57,43,0.4); animation: pulse 2s infinite;">
     <span class="id">⭐ Beri Ulasan</span><span class="en">⭐ Leave a Review</span>
   </button>
 </div>
