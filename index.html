@@ -387,21 +387,15 @@ body {
   max-width: 900px;
 }
 
-.hero-badge {
-  display: inline-flex; align-items: center; gap: 0.5rem;
-  background: rgba(212,160,23,0.2);
-  border: 1px solid rgba(212,160,23,0.4);
-  padding: 0.4rem 1.2rem;
-  border-radius: 2rem;
-  font-size: var(--text-xs);
-  color: var(--gold-light);
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+.hero-logo-badge {
+  display: inline-flex; align-items: center; justify-content: center;
   margin-bottom: var(--sp-4);
   animation: fadeUp 0.8s var(--ease-out) 0.5s backwards;
 }
-.hero-badge::before { content: '✦'; }
+.hero-logo-img {
+  width: 100px; height: auto;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+}
 
 .hero h1 {
   font-family: var(--font-display);
@@ -1670,9 +1664,8 @@ body {
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
   <div class="hero-content">
-    <div class="hero-badge">
-      <span class="id">Terpercaya Sejak 2018</span>
-      <span class="en">Trusted Since 2018</span>
+    <div class="hero-logo-badge">
+      <img src="img/lixscout-logo-loading.png" alt="LixScout" class="hero-logo-img">
     </div>
     <h1>
       <span class="id">Jelajahi Bali,<br><em>Bebaskan Jiwamu</em></span>
