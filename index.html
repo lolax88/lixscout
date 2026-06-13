@@ -3561,6 +3561,22 @@ const DB_CONFIG = {
   SUPABASE_ANON_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN0c3Bmb3l5eHFyaHJ0d2F0c25sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODEzNzE4ODksImV4cCI6MjA5Njk0Nzg4OX0.7kclUFmyClq2qSWcf8svIdGTdq_ejlAC5GCLpAC5i3w',
 };
 
+// Konversi UTC ke WITA (UTC+8)
+function toWita(utcString) {
+  if (!utcString) return '';
+  const date = new Date(utcString);
+  // Format ke WITA
+  return date.toLocaleString('id-ID', {
+    timeZone: 'Asia/Makassar', // WITA
+    day: '2-digit',
+    month: 'short',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false
+  });
+}
+
 async function claimDiscount() {
   const email = document.getElementById('discountEmail').value.trim();
   const errorEl = document.getElementById('emailError');
@@ -3890,7 +3906,7 @@ function addUserReviewToPage(review) {
   
   const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
   const initials = review.name.split(' ').map(w => w[0]).join('').toUpperCase().substring(0, 2);
-  const dateStr = new Date(review.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'short' });
+  const dateStr = toWita(review.date);
   
   const card = document.createElement('div');
   card.className = 'testi-card user-review reveal';
