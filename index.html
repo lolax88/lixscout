@@ -1012,8 +1012,23 @@ body {
   -webkit-overflow-scrolling: touch;
   padding-bottom: var(--sp-3);
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 .dest-scroll::-webkit-scrollbar { display: none; }
+
+.dest-track {
+  display: flex;
+  gap: var(--sp-4);
+  animation: destAutoScroll 40s linear infinite;
+  width: max-content;
+}
+.dest-track:hover {
+  animation-play-state: paused;
+}
+@keyframes destAutoScroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 
 .dest-card {
   flex: 0 0 280px;
@@ -1024,6 +1039,9 @@ body {
   aspect-ratio: 3/4;
   cursor: pointer;
   transition: transform 0.3s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
 }
 .dest-card:hover { transform: scale(1.03); }
 .dest-card img {
@@ -2366,7 +2384,8 @@ body {
     </div>
   </div>
   <div class="dest-scroll" style="padding-left:var(--sp-5);padding-right:var(--sp-5);">
-    <div class="dest-card reveal">
+    <div class="dest-track">
+    <a href="/blog/ubud" class="dest-card reveal">
       <img src="img/dest-ubud.jpg" alt="Ubud" loading="lazy">
       <div class="dest-overlay">
         <div class="dest-name">Ubud</div>
@@ -2375,8 +2394,8 @@ body {
           <span>📍 35 km</span>
         </div>
       </div>
-    </div>
-    <div class="dest-card reveal">
+    </a>
+    <a href="/blog/uluwatu" class="dest-card reveal">
       <img src="img/dest-uluwatu.jpg" alt="Uluwatu" loading="lazy">
       <div class="dest-overlay">
         <div class="dest-name">Uluwatu</div>
@@ -2385,8 +2404,8 @@ body {
           <span>📍 22 km</span>
         </div>
       </div>
-    </div>
-    <div class="dest-card reveal">
+    </a>
+    <a href="/blog/tanah-lot" class="dest-card reveal">
       <img src="img/dest-tanahlot.jpg" alt="Tanah Lot" loading="lazy">
       <div class="dest-overlay">
         <div class="dest-name">Tanah Lot</div>
@@ -2395,8 +2414,8 @@ body {
           <span>📍 20 km</span>
         </div>
       </div>
-    </div>
-    <div class="dest-card reveal">
+    </a>
+    <a href="/blog/kintamani" class="dest-card reveal">
       <img src="img/dest-kintamani.jpg" alt="Kintamani" loading="lazy">
       <div class="dest-overlay">
         <div class="dest-name">Kintamani</div>
@@ -2405,8 +2424,8 @@ body {
           <span>📍 55 km</span>
         </div>
       </div>
-    </div>
-    <div class="dest-card reveal">
+    </a>
+    <a href="/blog/nusa-penida" class="dest-card reveal">
       <img src="img/dest-nusapenida.jpg" alt="Nusa Penida" loading="lazy">
       <div class="dest-overlay">
         <div class="dest-name">Nusa Penida</div>
@@ -2415,8 +2434,8 @@ body {
           <span>📍 Sanur Harbor</span>
         </div>
       </div>
-    </div>
-    <div class="dest-card reveal">
+    </a>
+    <a href="/blog/sidemen" class="dest-card reveal">
       <img src="img/dest-sidemen.jpg" alt="Sidemen" loading="lazy">
       <div class="dest-overlay">
         <div class="dest-name">Sidemen</div>
@@ -2425,8 +2444,8 @@ body {
           <span>📍 40 km</span>
         </div>
       </div>
-    </div>
-    <div class="dest-card reveal">
+    </a>
+    <a href="/blog/bedugul" class="dest-card reveal">
       <img src="img/dest-bedugul.jpg" alt="Bedugul" loading="lazy">
       <div class="dest-overlay">
         <div class="dest-name">Bedugul</div>
@@ -2435,6 +2454,78 @@ body {
           <span>📍 50 km</span>
         </div>
       </div>
+    </a>
+    <!-- Duplicate for seamless loop -->
+    <a href="/blog/ubud" class="dest-card reveal">
+      <img src="img/dest-ubud.jpg" alt="Ubud" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Ubud</div>
+        <div class="dest-info">
+          <span>🕐 1.5 jam</span>
+          <span>📍 35 km</span>
+        </div>
+      </div>
+    </a>
+    <a href="/blog/uluwatu" class="dest-card reveal">
+      <img src="img/dest-uluwatu.jpg" alt="Uluwatu" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Uluwatu</div>
+        <div class="dest-info">
+          <span>🕐 1 jam</span>
+          <span>📍 22 km</span>
+        </div>
+      </div>
+    </a>
+    <a href="/blog/tanah-lot" class="dest-card reveal">
+      <img src="img/dest-tanahlot.jpg" alt="Tanah Lot" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Tanah Lot</div>
+        <div class="dest-info">
+          <span>🕐 1 jam</span>
+          <span>📍 20 km</span>
+        </div>
+      </div>
+    </a>
+    <a href="/blog/kintamani" class="dest-card reveal">
+      <img src="img/dest-kintamani.jpg" alt="Kintamani" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Kintamani</div>
+        <div class="dest-info">
+          <span>🕐 2 jam</span>
+          <span>📍 55 km</span>
+        </div>
+      </div>
+    </a>
+    <a href="/blog/nusa-penida" class="dest-card reveal">
+      <img src="img/dest-nusapenida.jpg" alt="Nusa Penida" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Nusa Penida</div>
+        <div class="dest-info">
+          <span>🕐 45 mnt + ferry</span>
+          <span>📍 Sanur Harbor</span>
+        </div>
+      </div>
+    </a>
+    <a href="/blog/sidemen" class="dest-card reveal">
+      <img src="img/dest-sidemen.jpg" alt="Sidemen" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Sidemen</div>
+        <div class="dest-info">
+          <span>🕐 1.5 jam</span>
+          <span>📍 40 km</span>
+        </div>
+      </div>
+    </a>
+    <a href="/blog/bedugul" class="dest-card reveal">
+      <img src="img/dest-bedugul.jpg" alt="Bedugul" loading="lazy">
+      <div class="dest-overlay">
+        <div class="dest-name">Bedugul</div>
+        <div class="dest-info">
+          <span>🕐 2 jam</span>
+          <span>📍 50 km</span>
+        </div>
+      </div>
+    </a>
     </div>
   </div>
 </section>
