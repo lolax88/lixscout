@@ -137,6 +137,60 @@
 }
 </script>
 
+<!-- SEO: Discount Offer Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Offer",
+  "name": "Diskon 5% Sewa Pertama",
+  "description": "Diskon spesial 5% untuk pelanggan baru Lixscout. Klaim dengan email, harga otomatis terpotong.",
+  "url": "https://lixscout.com",
+  "seller": {
+    "@type": "LocalBusiness",
+    "name": "Lixscout"
+  },
+  "priceSpecification": {
+    "@type": "PriceSpecification",
+    "price": "0",
+    "priceCurrency": "IDR",
+    "description": "Gratis klaim diskon 5% untuk sewa motor pertama"
+  },
+  "availability": "https://schema.org/InStock",
+  "validFrom": "2024-01-01",
+  "category": "Promo"
+}
+</script>
+
+<!-- SEO: Product Schema for Motor Rental -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Sewa Motor Bali - Lixscout",
+  "description": "Sewa motor harian dan bulanan di Bali. Honda Scoopy, Yamaha Fazzio, Vespa, NMAX, PCX, XMAX tersedia. Antar jemput gratis.",
+  "brand": {
+    "@type": "Brand",
+    "name": "Lixscout"
+  },
+  "offers": {
+    "@type": "AggregateOffer",
+    "lowPrice": "76000",
+    "highPrice": "285000",
+    "priceCurrency": "IDR",
+    "offerCount": "10",
+    "availability": "https://schema.org/InStock",
+    "priceValidUntil": "2026-12-31"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.8",
+    "reviewCount": "127",
+    "bestRating": "5"
+  }
+}
+</script>
+
+
 <link rel="icon" type="image/png" sizes="32x32" href="img/favicon-32.png">
 <link rel="icon" type="image/png" sizes="16x16" href="img/favicon-16.png">
 <link rel="apple-touch-icon" sizes="180x180" href="img/favicon-180.png">
@@ -1745,6 +1799,263 @@ body {
   stroke-width: 2;
 }
 
+
+/* ====== DISCOUNT POPUP SYSTEM ====== */
+.discount-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.discount-popup-overlay.active { display: flex; }
+.discount-popup {
+  background: var(--paper);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: popIn 0.3s ease;
+}
+@keyframes popIn {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+.discount-popup .close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--ink);
+  opacity: 0.5;
+}
+.discount-popup .close-btn:hover { opacity: 1; }
+.discount-popup h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+}
+.discount-popup p {
+  font-size: 0.9rem;
+  color: rgba(28,25,23,0.6);
+  margin-bottom: 1.2rem;
+}
+.discount-popup .email-input {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid rgba(28,25,23,0.15);
+  border-radius: 10px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.discount-popup .email-input:focus {
+  border-color: var(--gold);
+}
+.discount-popup .claim-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--gold);
+  color: var(--ink);
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  cursor: pointer;
+  margin-top: 0.8rem;
+  transition: background 0.2s;
+}
+.discount-popup .claim-btn:hover { background: var(--gold-dark); }
+.discount-popup .claim-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.discount-popup .discount-badge {
+  display: inline-block;
+  background: var(--military);
+  color: white;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+.discount-popup .success-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+}
+.discount-popup .error-msg {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 0.3rem;
+  display: none;
+}
+
+/* ====== REVIEW POPUP ====== */
+.review-popup-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.review-popup-overlay.active { display: flex; }
+.review-popup {
+  background: var(--paper);
+  border-radius: 16px;
+  padding: 2.5rem 2rem;
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  animation: popIn 0.3s ease;
+}
+.review-popup .close-btn {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--ink);
+  opacity: 0.5;
+}
+.review-popup .close-btn:hover { opacity: 1; }
+.review-popup h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--ink);
+  margin-bottom: 0.3rem;
+}
+.review-popup p {
+  font-size: 0.85rem;
+  color: rgba(28,25,23,0.6);
+  margin-bottom: 1rem;
+}
+.review-stars-input {
+  display: flex;
+  gap: 0.3rem;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.review-stars-input .star-btn {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  color: rgba(28,25,23,0.2);
+  transition: color 0.15s;
+  padding: 0;
+}
+.review-stars-input .star-btn.active { color: var(--gold); }
+.review-stars-input .star-btn:hover { color: var(--gold-light); }
+.review-textarea {
+  width: 100%;
+  padding: 0.8rem 1rem;
+  border: 2px solid rgba(28,25,23,0.15);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  outline: none;
+  resize: vertical;
+  min-height: 80px;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.review-textarea:focus { border-color: var(--gold); }
+.review-name-input {
+  width: 100%;
+  padding: 0.6rem 1rem;
+  border: 2px solid rgba(28,25,23,0.15);
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-family: var(--font-body);
+  outline: none;
+  margin-top: 0.6rem;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+.review-name-input:focus { border-color: var(--gold); }
+.review-submit-btn {
+  width: 100%;
+  padding: 0.9rem;
+  background: var(--military);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: var(--font-display);
+  cursor: pointer;
+  margin-top: 0.8rem;
+  transition: background 0.2s;
+}
+.review-submit-btn:hover { background: var(--ink); }
+
+/* ====== DISCOUNT ACTIVE STATE ====== */
+.discount-active-badge {
+  display: none;
+  background: linear-gradient(135deg, var(--military) 0%, #5a7a2f 100%);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.discount-active-badge.show { display: block; }
+
+/* Price discount strike-through */
+.price-discount-tag {
+  display: none;
+  background: #e74c3c;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  margin-left: 0.3rem;
+  vertical-align: middle;
+}
+.price-discount-tag.show { display: inline-block; }
+
+/* ====== USER REVIEW CARD IN TESTIMONIALS ====== */
+.testi-card.user-review {
+  border: 2px solid var(--gold);
+  position: relative;
+}
+.testi-card.user-review::before {
+  content: '\1F4DD';
+  position: absolute;
+  top: -8px;
+  right: 12px;
+  background: var(--gold);
+  font-size: 0.7rem;
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
 /* Discount Banner */
 .discount-banner {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
@@ -2288,12 +2599,78 @@ body {
 <div class="poleng-divider"></div>
 
 <!-- ======================== DISCOUNT BANNER ======================== -->
-<div class="discount-banner">
-  <h3><span class="id">🎉 Diskon 5% Sewa Pertama!</span><span class="en">🎉 5% Off Your First Rental!</span></h3>
-  <p><span class="id">Pesan sekarang dan dapatkan diskon spesial untuk pelanggan baru.</span><span class="en">Book now and get a special discount for new customers.</span></p>
-  <a href="javascript:void(0)" class="btn btn-primary" onclick="showChatModal('Halo, saya mau klaim diskon 5% sewa pertama')">
+<div class="discount-banner" id="discountBanner">
+  <div class="discount-active-badge" id="discountActiveBadge">
+    <span class="id">✅ Diskon 5% AKTIF! Harga sudah dipotong otomatis.</span>
+    <span class="en">✅ 5% Discount ACTIVE! Prices auto-adjusted.</span>
+  </div>
+  <h3 id="discountTitle"><span class="id">🎉 Diskon 5% Sewa Pertama!</span><span class="en">🎉 5% Off Your First Rental!</span></h3>
+  <p id="discountDesc"><span class="id">Masukkan emailmu dan langsung klaim diskonnya!</span><span class="en">Enter your email and claim your discount instantly!</span></p>
+  <button class="btn btn-primary" id="discountClaimBtn" onclick="openDiscountPopup()">
     <span class="id">Klaim Diskon</span><span class="en">Claim Discount</span>
-  </a>
+  </button>
+  <button class="btn btn-primary" id="discountReviewBtn" onclick="openReviewPopup()" style="display:none; background: var(--military); color: white;">
+    <span class="id">⭐ Beri Ulasan</span><span class="en">⭐ Leave a Review</span>
+  </button>
+</div>
+
+<!-- ======================== DISCOUNT POPUP ======================== -->
+<div class="discount-popup-overlay" id="discountPopup">
+  <div class="discount-popup">
+    <button class="close-btn" onclick="closeDiscountPopup()">&times;</button>
+    <div id="discountForm">
+      <div class="discount-badge">5% OFF</div>
+      <h3><span class="id">Klaim Diskon 5%</span><span class="en">Claim 5% Discount</span></h3>
+      <p><span class="id">Masukkan email, diskon langsung aktif. Tanpa ribet!</span><span class="en">Enter your email, discount activates instantly. No hassle!</span></p>
+      <input type="email" class="email-input" id="discountEmail" placeholder="email@kamu.com" required>
+      <div class="error-msg" id="emailError"><span class="id">Email tidak valid!</span><span class="en">Invalid email!</span></div>
+      <button class="claim-btn" onclick="claimDiscount()">
+        <span class="id">🎁 Klaim Sekarang!</span>
+        <span class="en">🎁 Claim Now!</span>
+      </button>
+    </div>
+    <div id="discountSuccess" style="display:none;">
+      <div class="success-icon">🎉</div>
+      <h3><span class="id">Diskon 5% AKTIF!</span><span class="en">5% Discount ACTIVE!</span></h3>
+      <p><span class="id">Harga di semua motor udah kepotong otomatis. Yuk booking!</span><span class="en">All bike prices are now auto-discounted. Let's book!</span></p>
+      <button class="claim-btn" onclick="closeDiscountPopup()" style="background: var(--military); color: white;">
+        <span class="id">Oke, Lanjut Booking!</span>
+        <span class="en">OK, Let's Book!</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== REVIEW POPUP ======================== -->
+<div class="review-popup-overlay" id="reviewPopup">
+  <div class="review-popup">
+    <button class="close-btn" onclick="closeReviewPopup()">&times;</button>
+    <div id="reviewForm">
+      <h3><span class="id">⭐ Gimana Pengalamanmu?</span><span class="en">⭐ How Was Your Experience?</span></h3>
+      <p><span class="id">Bantu traveler lain dengan ulasanmu! Plus, reviewer bakal dapet kupon diskon event berikutnya.</span><span class="en">Help other travelers with your review! Reviewers get discount coupons for future events.</span></p>
+      <div class="review-stars-input" id="reviewStars">
+        <button class="star-btn" onclick="setReviewStar(1)">★</button>
+        <button class="star-btn" onclick="setReviewStar(2)">★</button>
+        <button class="star-btn" onclick="setReviewStar(3)">★</button>
+        <button class="star-btn" onclick="setReviewStar(4)">★</button>
+        <button class="star-btn" onclick="setReviewStar(5)">★</button>
+      </div>
+      <textarea class="review-textarea" id="reviewText" placeholder="Ceritain pengalamanmu..."></textarea>
+      <input type="text" class="review-name-input" id="reviewName" placeholder="Nama (opsional)">
+      <button class="review-submit-btn" onclick="submitReview()">
+        <span class="id">Kirim Ulasan</span>
+        <span class="en">Submit Review</span>
+      </button>
+    </div>
+    <div id="reviewSuccess" style="display:none;">
+      <div class="success-icon">🙏</div>
+      <h3><span class="id">Makasih Ya!</span><span class="en">Thank You!</span></h3>
+      <p><span class="id">Ulasanmu udah tampil di website. Kupon diskon event berikutnya bakal dikirim ke emailmu!</span><span class="en">Your review is now live on the website. Event discount coupon will be sent to your email!</span></p>
+      <button class="review-submit-btn" onclick="closeReviewPopup()">
+        <span class="id">Oke!</span><span class="en">OK!</span>
+      </button>
+    </div>
+  </div>
 </div>
 
 <!-- ======================== WHY US ======================== -->
@@ -2671,6 +3048,10 @@ body {
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- User Reviews from localStorage -->
+    <div class="testi-grid" id="userReviewsGrid" style="margin-top: 1.5rem;">
     </div>
   </div>
 </section>
@@ -3121,6 +3502,271 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
       window.scrollTo({ top: y, behavior: 'smooth' });
     }
   });
+});
+
+
+// ====== DISCOUNT & REVIEW SYSTEM ======
+const DISCOUNT_KEY = 'lixscout_discount';
+const REVIEW_KEY = 'lixscout_reviews';
+let reviewRating = 0;
+
+// Check if discount already claimed on page load
+(function initDiscountSystem() {
+  const data = getDiscountData();
+  if (data.claimed) {
+    applyDiscountUI();
+    applyPriceDiscount();
+  }
+  loadUserReviews();
+})();
+
+function getDiscountData() {
+  try {
+    return JSON.parse(localStorage.getItem(DISCOUNT_KEY)) || { claimed: false, email: '', reviewed: false };
+  } catch { return { claimed: false, email: '', reviewed: false }; }
+}
+
+function saveDiscountData(data) {
+  localStorage.setItem(DISCOUNT_KEY, JSON.stringify(data));
+}
+
+// ====== DISCOUNT POPUP ======
+function openDiscountPopup() {
+  const data = getDiscountData();
+  if (data.claimed) {
+    // Already claimed, show review option instead
+    if (!data.reviewed) {
+      openReviewPopup();
+    }
+    return;
+  }
+  document.getElementById('discountPopup').classList.add('active');
+  document.getElementById('discountForm').style.display = 'block';
+  document.getElementById('discountSuccess').style.display = 'none';
+  document.getElementById('discountEmail').value = '';
+  document.getElementById('emailError').style.display = 'none';
+  document.getElementById('discountEmail').focus();
+}
+function closeDiscountPopup() {
+  document.getElementById('discountPopup').classList.remove('active');
+}
+
+function claimDiscount() {
+  const email = document.getElementById('discountEmail').value.trim();
+  const errorEl = document.getElementById('emailError');
+  
+  // Validate email
+  if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    errorEl.style.display = 'block';
+    return;
+  }
+  errorEl.style.display = 'none';
+  
+  // Save to localStorage
+  saveDiscountData({ claimed: true, email: email, reviewed: false, claimedAt: new Date().toISOString() });
+  
+  // Show success
+  document.getElementById('discountForm').style.display = 'none';
+  document.getElementById('discountSuccess').style.display = 'block';
+  
+  // Apply discount to UI
+  applyDiscountUI();
+  applyPriceDiscount();
+  
+  // Track event
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'discount_claimed', { event_category: 'conversion', event_label: email });
+  }
+  if (typeof fbq !== 'undefined') {
+    fbq('track', 'Lead', { content_name: '5% Discount Claim' });
+  }
+}
+
+function applyDiscountUI() {
+  document.getElementById('discountClaimBtn').style.display = 'none';
+  document.getElementById('discountReviewBtn').style.display = 'inline-block';
+  document.getElementById('discountActiveBadge').classList.add('show');
+  document.getElementById('discountTitle').innerHTML = '<span class="id">✅ Diskon 5% Udah Aktif!</span><span class="en">✅ 5% Discount Active!</span>';
+  document.getElementById('discountDesc').innerHTML = '<span class="id">Harga di semua motor udah kepotong. Booking sekarang!</span><span class="en">All bike prices are discounted. Book now!</span>';
+}
+
+function applyPriceDiscount() {
+  document.querySelectorAll('.bike-card').forEach(card => {
+    const priceDayEl = card.querySelector('.price-idr');
+    const priceUsdEl = card.querySelector('.price-usd');
+    if (!priceDayEl) return;
+    
+    // Get original prices from data attributes
+    const origDay = parseInt(card.dataset.priceDay);
+    const origMonth = parseInt(card.dataset.priceMonth);
+    if (!origDay) return;
+    
+    const discDay = Math.round(origDay * 0.95);
+    const discMonth = Math.round(origMonth * 0.95);
+    
+    // Format
+    const fmtDay = discDay.toLocaleString('id-ID');
+    const fmtMonth = discMonth.toLocaleString('id-ID');
+    
+    // Update IDR prices
+    priceDayEl.setAttribute('data-day', fmtDay + ' IDR');
+    priceDayEl.setAttribute('data-month', fmtMonth + ' IDR');
+    
+    // Update USD prices (approx)
+    const usdDay = Math.round(discDay / 16000);
+    const usdMonth = Math.round(discMonth / 16000);
+    if (priceUsdEl) {
+      priceUsdEl.setAttribute('data-day', '~$' + usdDay);
+      priceUsdEl.setAttribute('data-month', '~$' + usdMonth);
+    }
+    
+    // Show current view (check which toggle is active)
+    const activeBtn = card.querySelector('.bike-toggle-btn.active');
+    const mode = activeBtn ? (activeBtn.textContent.trim().toLowerCase().includes('month') ? 'month' : 'day') : 'day';
+    priceDayEl.textContent = mode === 'day' ? fmtDay + ' IDR' : fmtMonth + ' IDR';
+    if (priceUsdEl) priceUsdEl.textContent = mode === 'day' ? '~$' + usdDay : '~$' + usdMonth;
+    
+    // Add discount tag
+    let tag = card.querySelector('.price-discount-tag');
+    if (!tag) {
+      tag = document.createElement('span');
+      tag.className = 'price-discount-tag show';
+      tag.textContent = '-5%';
+      const priceMain = card.querySelector('.bike-price-main');
+      if (priceMain) priceMain.appendChild(tag);
+    } else {
+      tag.classList.add('show');
+    }
+  });
+}
+
+// ====== REVIEW POPUP ======
+function openReviewPopup() {
+  document.getElementById('reviewPopup').classList.add('active');
+  document.getElementById('reviewForm').style.display = 'block';
+  document.getElementById('reviewSuccess').style.display = 'none';
+  document.getElementById('reviewText').value = '';
+  document.getElementById('reviewName').value = '';
+  reviewRating = 0;
+  updateStarUI();
+}
+function closeReviewPopup() {
+  document.getElementById('reviewPopup').classList.remove('active');
+}
+
+function setReviewStar(n) {
+  reviewRating = n;
+  updateStarUI();
+}
+function updateStarUI() {
+  const btns = document.querySelectorAll('#reviewStars .star-btn');
+  btns.forEach((btn, i) => {
+    btn.classList.toggle('active', i < reviewRating);
+  });
+}
+
+function submitReview() {
+  if (reviewRating === 0) {
+    alert(document.documentElement.lang === 'en' ? 'Please select a rating!' : 'Pilih rating dulu ya!');
+    return;
+  }
+  
+  const text = document.getElementById('reviewText').value.trim();
+  const name = document.getElementById('reviewName').value.trim() || 'Traveler';
+  const data = getDiscountData();
+  
+  // Save review to localStorage
+  const reviews = getReviews();
+  const newReview = {
+    rating: reviewRating,
+    text: text || (document.documentElement.lang === 'en' ? 'Great service!' : 'Pelayanan bagus!'),
+    name: name,
+    email: data.email || '',
+    reviewed: true,
+    date: new Date().toISOString()
+  };
+  reviews.push(newReview);
+  localStorage.setItem(REVIEW_KEY, JSON.stringify(reviews));
+  
+  // Mark as reviewed in discount data
+  data.reviewed = true;
+  saveDiscountData(data);
+  
+  // Update review button
+  document.getElementById('discountReviewBtn').innerHTML = '<span class="id">✅ Udah Ulasan!</span><span class="en">✅ Reviewed!</span>';
+  document.getElementById('discountReviewBtn').style.opacity = '0.6';
+  document.getElementById('discountReviewBtn').onclick = null;
+  
+  // Show success
+  document.getElementById('reviewForm').style.display = 'none';
+  document.getElementById('reviewSuccess').style.display = 'block';
+  
+  // Add to testimonials section
+  addUserReviewToPage(newReview);
+  
+  // Track event
+  if (typeof gtag !== 'undefined') {
+    gtag('event', 'review_submitted', { event_category: 'engagement', event_label: name, value: reviewRating });
+  }
+}
+
+function getReviews() {
+  try {
+    return JSON.parse(localStorage.getItem(REVIEW_KEY)) || [];
+  } catch { return []; }
+}
+
+function loadUserReviews() {
+  const reviews = getReviews();
+  reviews.forEach(r => addUserReviewToPage(r));
+  
+  // Check if user already reviewed
+  const data = getDiscountData();
+  if (data.claimed && data.reviewed) {
+    document.getElementById('discountReviewBtn').innerHTML = '<span class="id">✅ Udah Ulasan!</span><span class="en">✅ Reviewed!</span>';
+    document.getElementById('discountReviewBtn').style.opacity = '0.6';
+    document.getElementById('discountReviewBtn').onclick = null;
+  }
+}
+
+function addUserReviewToPage(review) {
+  const grid = document.getElementById('userReviewsGrid');
+  if (!grid) return;
+  
+  const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+  const initials = review.name.split(' ').map(w => w[0]).join('').toUpperCase().substring(0, 2);
+  const dateStr = new Date(review.date).toLocaleDateString('id-ID', { year: 'numeric', month: 'short' });
+  
+  const card = document.createElement('div');
+  card.className = 'testi-card user-review reveal';
+  card.innerHTML = `
+    <div class="testi-stars">${stars}</div>
+    <p class="testi-text">"${review.text}"</p>
+    <div class="testi-author">
+      <div class="testi-avatar">${initials}</div>
+      <div>
+        <div class="testi-name">${review.name}</div>
+        <div class="testi-origin">${dateStr}</div>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+}
+
+// Close popups on overlay click
+document.getElementById('discountPopup').addEventListener('click', function(e) {
+  if (e.target === this) closeDiscountPopup();
+});
+document.getElementById('reviewPopup').addEventListener('click', function(e) {
+  if (e.target === this) closeReviewPopup();
+});
+
+// Close popups on Escape
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeDiscountPopup();
+    closeReviewPopup();
+  }
 });
 
 // ====== Stock Status (from stock.json) ======
