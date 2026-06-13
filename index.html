@@ -222,36 +222,21 @@ body {
 }
 .loader-overlay.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
 
-.lotus-loader { width: 80px; height: 80px; position: relative; }
-.lotus-loader .petal {
-  position: absolute; left: 50%; bottom: 40%;
-  width: 12px; height: 32px;
-  background: var(--terracotta);
-  border-radius: 50% 50% 50% 50% / 70% 70% 30% 30%;
-  transform-origin: bottom center;
+.logo-loader {
+  display: flex; align-items: center; justify-content: center;
+  animation: logoFadeIn 1.2s ease-out forwards;
+}
+.loader-logo {
+  width: 140px; height: auto;
   opacity: 0;
+  animation: logoAppear 1.2s ease-out forwards;
+  filter: drop-shadow(0 4px 12px rgba(0,0,0,0.1));
 }
-.lotus-loader .petal:nth-child(1) { transform: translateX(-50%) rotate(-60deg); animation: lotusBloom 1.8s ease-out 0s forwards; }
-.lotus-loader .petal:nth-child(2) { transform: translateX(-50%) rotate(-40deg); animation: lotusBloom 1.8s ease-out 0.1s forwards; }
-.lotus-loader .petal:nth-child(3) { transform: translateX(-50%) rotate(-20deg); animation: lotusBloom 1.8s ease-out 0.2s forwards; }
-.lotus-loader .petal:nth-child(4) { transform: translateX(-50%) rotate(0deg); animation: lotusBloom 1.8s ease-out 0.3s forwards; }
-.lotus-loader .petal:nth-child(5) { transform: translateX(-50%) rotate(20deg); animation: lotusBloom 1.8s ease-out 0.4s forwards; }
-.lotus-loader .petal:nth-child(6) { transform: translateX(-50%) rotate(40deg); animation: lotusBloom 1.8s ease-out 0.5s forwards; }
-.lotus-loader .petal:nth-child(7) { transform: translateX(-50%) rotate(60deg); animation: lotusBloom 1.8s ease-out 0.6s forwards; }
-
-@keyframes lotusBloom {
-  0% { opacity: 0; transform: translateX(-50%) rotate(var(--rot, 0deg)) scale(0.3); height: 8px; }
-  60% { opacity: 1; height: 32px; }
-  100% { opacity: 1; transform: translateX(-50%) rotate(var(--rot, 0deg)) scale(1); height: 28px; }
+@keyframes logoAppear {
+  0% { opacity: 0; transform: scale(0.8); }
+  60% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 1; transform: scale(1); }
 }
-
-.lotus-loader .petal:nth-child(1) { --rot: -60deg; background: var(--terracotta); }
-.lotus-loader .petal:nth-child(2) { --rot: -40deg; background: #D05A22; }
-.lotus-loader .petal:nth-child(3) { --rot: -20deg; background: var(--gold); }
-.lotus-loader .petal:nth-child(4) { --rot: 0deg; background: var(--gold-light); }
-.lotus-loader .petal:nth-child(5) { --rot: 20deg; background: var(--gold); }
-.lotus-loader .petal:nth-child(6) { --rot: 40deg; background: #D05A22; }
-.lotus-loader .petal:nth-child(7) { --rot: 60deg; background: var(--terracotta); }
 
 /* ============================
    POLENG DIVIDER
@@ -1633,10 +1618,8 @@ body {
 
 <!-- ======================== LOTUS LOADER ======================== -->
 <div class="loader-overlay" id="loader">
-  <div class="lotus-loader">
-    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-    <div class="petal"></div><div class="petal"></div><div class="petal"></div>
-    <div class="petal"></div>
+  <div class="logo-loader">
+    <img src="img/lixscout-logo-loading.png" alt="LixScout" class="loader-logo">
   </div>
 </div>
 
