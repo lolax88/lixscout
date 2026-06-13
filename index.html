@@ -3411,8 +3411,16 @@ function checkAvailability(e) {
 
 // ====== Chat Modal ======
 function showChatModal(msg) {
-  const waLink = `https://wa.me/6282145210518?text=${encodeURIComponent(msg)}`;
-  const tgLink = `https://t.me/+6282145210518?text=${encodeURIComponent(msg)}`;
+  // Cek apakah user sudah klaim diskon
+  const discountData = getDiscountData();
+  let finalMsg = msg;
+  
+  if (discountData.claimed) {
+    finalMsg = msg + ' (Saya sudah klaim diskon 5% email: ' + discountData.email + ')';
+  }
+  
+  const waLink = `https://wa.me/6282145210518?text=${encodeURIComponent(finalMsg)}`;
+  const tgLink = `https://t.me/lixscout?text=${encodeURIComponent(finalMsg)}`;
   document.getElementById('chatModalWA').href = waLink;
   document.getElementById('chatModalTG').href = tgLink;
   document.getElementById('chatModal').classList.add('active');
